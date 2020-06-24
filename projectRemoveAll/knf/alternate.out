@@ -1,0 +1,903 @@
+scanning ALL
+scanning variable z
+scanning opening brackets
+scanning opening brackets
+scanning EX
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning AND
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (x,z)
+reducing to atom Q(x,z)
+reducing to conjunction (AND P(x) Q(x,z))
+scanning closing brackets
+reducing to brackets (AND P(x) Q(x,z))
+reducing to existential formula (EX x (AND P(x) Q(x,z)))
+scanning OR
+scanning EX
+scanning variable y
+scanning opening brackets
+scanning NOT
+scanning predicate P
+scanning opening brackets
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to atom P(y)
+reducing to negation (NOT P(y))
+scanning AND
+scanning NOT
+scanning predicate Q
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to term sequence (z,y)
+reducing to atom Q(z,y)
+reducing to negation (NOT Q(z,y))
+reducing to conjunction (AND (NOT P(y)) (NOT Q(z,y)))
+scanning closing brackets
+reducing to brackets (AND (NOT P(y)) (NOT Q(z,y)))
+reducing to existential formula (EX y (AND (NOT P(y)) (NOT Q(z,y))))
+scanning closing brackets
+reducing to disjunction (OR (EX x (AND P(x) Q(x,z))) (EX y (AND (NOT P(y)) (NOT Q(z,y)))))
+reducing to brackets (OR (EX x (AND P(x) Q(x,z))) (EX y (AND (NOT P(y)) (NOT Q(z,y)))))
+scanning AND
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to atom P(z)
+scanning AND
+scanning predicate Q
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (z,z)
+reducing to atom Q(z,z)
+reducing to conjunction (AND P(z) Q(z,z))
+scanning OR
+scanning opening brackets
+scanning ALL
+scanning variable x
+scanning EX
+scanning variable y
+scanning opening brackets
+scanning predicate Q
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to term sequence (z,y)
+reducing to atom Q(z,y)
+scanning AND
+scanning predicate Q
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning comma
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to term sequence (z,x)
+reducing to atom Q(z,x)
+reducing to conjunction (AND Q(z,y) Q(z,x))
+scanning closing brackets
+reducing to brackets (AND Q(z,y) Q(z,x))
+reducing to existential formula (EX y (AND Q(z,y) Q(z,x)))
+reducing to universal formula (ALL x (EX y (AND Q(z,y) Q(z,x))))
+scanning closing brackets
+reducing to brackets (ALL x (EX y (AND Q(z,y) Q(z,x))))
+scanning closing brackets
+reducing to disjunction (OR (AND P(z) Q(z,z)) (ALL x (EX y (AND Q(z,y) Q(z,x)))))
+reducing to brackets (OR (AND P(z) Q(z,z)) (ALL x (EX y (AND Q(z,y) Q(z,x)))))
+reducing to conjunction (AND (OR (EX x (AND P(x) Q(x,z))) (EX y (AND (NOT P(y)) (NOT Q(z,y))))) (OR (AND P(z) Q(z,z)) (ALL x (EX y (AND Q(z,y) Q(z,x))))))
+scanning OR
+scanning ALL
+scanning variable r
+scanning EX
+scanning variable s
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable r
+reducing variable to term r
+scanning closing brackets
+reducing last term to term sequence (r)
+reducing to atom P(r)
+scanning OR
+scanning predicate P
+scanning opening brackets
+scanning variable s
+reducing variable to term s
+scanning closing brackets
+reducing last term to term sequence (s)
+reducing to atom P(s)
+scanning IMPLICATION
+reducing to disjunction (OR P(r) P(s))
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable r
+reducing variable to term r
+scanning closing brackets
+reducing last term to term sequence (r)
+reducing to term sequence (x,r)
+reducing to atom Q(x,r)
+scanning AND
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable s
+reducing variable to term s
+scanning closing brackets
+reducing last term to term sequence (s)
+reducing to term sequence (x,s)
+reducing to atom Q(x,s)
+reducing to conjunction (AND Q(x,r) Q(x,s))
+scanning closing brackets
+reducing to implication ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s)))
+reducing to brackets ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s)))
+reducing to existential formula (EX s ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s))))
+reducing to universal formula (ALL r (EX s ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s)))))
+scanning AND
+scanning opening brackets
+scanning EX
+scanning variable x
+scanning opening brackets
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (x,z)
+reducing to atom Q(x,z)
+scanning AND
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to term sequence (x,x)
+reducing to atom Q(x,x)
+reducing to conjunction (AND Q(x,z) Q(x,x))
+scanning closing brackets
+reducing to brackets (AND Q(x,z) Q(x,x))
+reducing to existential formula (EX x (AND Q(x,z) Q(x,x)))
+scanning OR
+scanning opening brackets
+scanning EX
+scanning variable x
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (x,z)
+reducing to atom Q(x,z)
+reducing to existential formula (EX x Q(x,z))
+scanning AND
+scanning EX
+scanning variable y
+scanning predicate Q
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to term sequence (z,y)
+reducing to atom Q(z,y)
+reducing to existential formula (EX y Q(z,y))
+reducing to conjunction (AND (EX x Q(x,z)) (EX y Q(z,y)))
+scanning closing brackets
+reducing to brackets (AND (EX x Q(x,z)) (EX y Q(z,y)))
+scanning closing brackets
+reducing to disjunction (OR (EX x (AND Q(x,z) Q(x,x))) (AND (EX x Q(x,z)) (EX y Q(z,y))))
+reducing to brackets (OR (EX x (AND Q(x,z) Q(x,x))) (AND (EX x Q(x,z)) (EX y Q(z,y))))
+reducing to conjunction (AND (ALL r (EX s ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s))))) (OR (EX x (AND Q(x,z) Q(x,x))) (AND (EX x Q(x,z)) (EX y Q(z,y)))))
+scanning closing brackets
+reducing to disjunction (OR (AND (OR (EX x (AND P(x) Q(x,z))) (EX y (AND (NOT P(y)) (NOT Q(z,y))))) (OR (AND P(z) Q(z,z)) (ALL x (EX y (AND Q(z,y) Q(z,x)))))) (AND (ALL r (EX s ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s))))) (OR (EX x (AND Q(x,z) Q(x,x))) (AND (EX x Q(x,z)) (EX y Q(z,y))))))
+reducing to brackets (OR (AND (OR (EX x (AND P(x) Q(x,z))) (EX y (AND (NOT P(y)) (NOT Q(z,y))))) (OR (AND P(z) Q(z,z)) (ALL x (EX y (AND Q(z,y) Q(z,x)))))) (AND (ALL r (EX s ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s))))) (OR (EX x (AND Q(x,z) Q(x,x))) (AND (EX x Q(x,z)) (EX y Q(z,y))))))
+reducing to universal formula (ALL z (OR (AND (OR (EX x (AND P(x) Q(x,z))) (EX y (AND (NOT P(y)) (NOT Q(z,y))))) (OR (AND P(z) Q(z,z)) (ALL x (EX y (AND Q(z,y) Q(z,x)))))) (AND (ALL r (EX s ((OR P(r) P(s)) IMPLIES (AND Q(x,r) Q(x,s))))) (OR (EX x (AND Q(x,z) Q(x,x))) (AND (EX x Q(x,z)) (EX y Q(z,y)))))))
+storing result.
+
+Original formula:
+ALL z
+ OR
+  AND
+   OR
+    EX x
+     AND
+      P(x)
+      Q(x,z)
+    EX y
+     AND
+      NOT
+       P(y)
+      NOT
+       Q(z,y)
+   OR
+    AND
+     P(z)
+     Q(z,z)
+    ALL x
+     EX y
+      AND
+       Q(z,y)
+       Q(z,x)
+  AND
+   ALL r
+    EX s
+     IMPLIES
+      OR
+       P(r)
+       P(s)
+      AND
+       Q(x,r)
+       Q(x,s)
+   OR
+    EX x
+     AND
+      Q(x,z)
+      Q(x,x)
+    AND
+     EX x
+      Q(x,z)
+     EX y
+      Q(z,y)
+
+Without arrows:
+ALL z
+ OR
+  AND
+   OR
+    EX x
+     AND
+      P(x)
+      Q(x,z)
+    EX y
+     AND
+      NOT
+       P(y)
+      NOT
+       Q(z,y)
+   OR
+    AND
+     P(z)
+     Q(z,z)
+    ALL x
+     EX y
+      AND
+       Q(z,y)
+       Q(z,x)
+  AND
+   ALL r
+    EX s
+     OR
+      AND
+       Q(x,r)
+       Q(x,s)
+      NOT
+       OR
+        P(r)
+        P(s)
+   OR
+    EX x
+     AND
+      Q(x,z)
+      Q(x,x)
+    AND
+     EX x
+      Q(x,z)
+     EX y
+      Q(z,y)
+
+NNF:
+ALL z
+ OR
+  AND
+   OR
+    EX x
+     AND
+      P(x)
+      Q(x,z)
+    EX y
+     AND
+      NOT
+       P(y)
+      NOT
+       Q(z,y)
+   OR
+    AND
+     P(z)
+     Q(z,z)
+    ALL x
+     EX y
+      AND
+       Q(z,y)
+       Q(z,x)
+  AND
+   ALL r
+    EX s
+     OR
+      AND
+       Q(x,r)
+       Q(x,s)
+      AND
+       NOT
+        P(r)
+       NOT
+        P(s)
+   OR
+    EX x
+     AND
+      Q(x,z)
+      Q(x,x)
+    AND
+     EX x
+      Q(x,z)
+     EX y
+      Q(z,y)
+
+Renamed Variables:
+ALL v1
+ OR
+  AND
+   OR
+    EX v2
+     AND
+      P(v2)
+      Q(v2,v1)
+    EX v3
+     AND
+      NOT
+       P(v3)
+      NOT
+       Q(v1,v3)
+   OR
+    AND
+     P(v1)
+     Q(v1,v1)
+    ALL v4
+     EX v5
+      AND
+       Q(v1,v5)
+       Q(v1,v4)
+  AND
+   ALL v6
+    EX v7
+     OR
+      AND
+       Q(x,v6)
+       Q(x,v7)
+      AND
+       NOT
+        P(v6)
+       NOT
+        P(v7)
+   OR
+    EX v8
+     AND
+      Q(v8,v1)
+      Q(v8,v8)
+    AND
+     EX v9
+      Q(v9,v1)
+     EX v10
+      Q(v1,v10)
+
+Skolemised:
+ALL v1
+ OR
+  AND
+   OR
+    AND
+     P(f1(v1))
+     Q(f1(v1),v1)
+    AND
+     NOT
+      P(f2(v1))
+     NOT
+      Q(v1,f2(v1))
+   OR
+    AND
+     P(v1)
+     Q(v1,v1)
+    ALL v4
+     AND
+      Q(v1,f3(v4,v1))
+      Q(v1,v4)
+  AND
+   ALL v6
+    OR
+     AND
+      Q(x,v6)
+      Q(x,f4(v6,v1))
+     AND
+      NOT
+       P(v6)
+      NOT
+       P(f4(v6,v1))
+   OR
+    AND
+     Q(f5(v1),v1)
+     Q(f5(v1),f5(v1))
+    AND
+     Q(f6(v1),v1)
+     Q(v1,f7(v1))
+
+Universal quantifiers removed:
+OR
+ AND
+  OR
+   AND
+    P(f1(v1))
+    Q(f1(v1),v1)
+   AND
+    NOT
+     P(f2(v1))
+    NOT
+     Q(v1,f2(v1))
+  OR
+   AND
+    P(v1)
+    Q(v1,v1)
+   AND
+    Q(v1,f3(v4,v1))
+    Q(v1,v4)
+ AND
+  OR
+   AND
+    Q(x,v6)
+    Q(x,f4(v6,v1))
+   AND
+    NOT
+     P(v6)
+    NOT
+     P(f4(v6,v1))
+  OR
+   AND
+    Q(f5(v1),v1)
+    Q(f5(v1),f5(v1))
+   AND
+    Q(f6(v1),v1)
+    Q(v1,f7(v1))
+
+KNF:
+AND
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(v6)
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(v6)
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,f4(v6,v1))
+  NOT
+   P(f4(v6,v1))
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(x,v6)
+  NOT
+   P(f4(v6,v1))
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(f6(v1),v1)
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(f6(v1),v1)
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),f5(v1))
+  Q(v1,f7(v1))
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  P(v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  Q(v1,v1)
+  Q(v1,v4)
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  P(v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  Q(v1,v1)
+  Q(v1,f3(v4,v1))
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  P(f1(v1))
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  Q(f1(v1),v1)
+  NOT
+   Q(v1,f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  P(f1(v1))
+  NOT
+   P(f2(v1))
+ OR
+  Q(f5(v1),v1)
+  Q(v1,f7(v1))
+  Q(f1(v1),v1)
+  NOT
+   P(f2(v1))
