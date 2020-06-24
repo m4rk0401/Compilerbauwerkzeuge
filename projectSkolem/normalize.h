@@ -16,7 +16,7 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc);
 void renameTermSkolem(term * termElement, char * selectedVarFunc);
 void renameTermListSkolem(termList * termListElement, char * selectedVarFunc);
 void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc);
-
+void removeQuantoren(formula * formulaElement);
 
 int nameCounter = 1;
 bool renamed = false;
@@ -439,4 +439,26 @@ void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc)
     {
         renameTermListSkolemAll(termListElement -> next, selectedVarFunc);
     }
+}
+
+void removeQuantoren(formula * formulaElement)
+{
+	/* check for subformula left and right */
+    if(formulaElement -> subL != NULL)
+    {
+        removeQuantoren(formulaElement -> subL);
+    }
+    if(formulaElement -> subR != NULL)
+    {
+        removeQuantoren(formulaElement -> subR);
+    }
+
+    /* check for all and ex */
+    if(formulaElement -> typS == type_all || formulaElement -> typS == type_ex)
+    {
+	
+		
+		
+	}
+	
 }
