@@ -1700,10 +1700,19 @@ int main (int argc, char* argv[])
   originalPrint(formula_input, 0);
   printf("\n");
 
+  /* NNF with mutiple output 
   printf("Without arrows:\n");
   eleminationOfArrows(formula_withoutArrows);
   originalPrint(formula_withoutArrows, 0);
   printf("\n");
+  printf("deMorgan rules:\n");
+  deMorganRules(formula_withoutArrows);
+  originalPrint(formula_withoutArrows, 0);
+  printf("\n");
+  printf("Double negation:\n");
+  eleminationOfDoubleNegation(formula_withoutArrows);
+  originalPrint(formula_withoutArrows, 0);
+  printf("\n");*/
 
   printf("NNF:\n");
   nnf(formula_input);
@@ -1714,7 +1723,7 @@ int main (int argc, char* argv[])
   renameRule(formula_input);
   originalPrint(formula_input, 0);
   printf("\n");
-
+  
   printf("Skolemization:\n");
   skolemizationRule(formula_input);
   originalPrint(formula_input, 0);

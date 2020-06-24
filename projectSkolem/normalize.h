@@ -16,14 +16,15 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc);
 void renameTermSkolem(term * termElement, char * selectedVarFunc);
 void renameTermListSkolem(termList * termListElement, char * selectedVarFunc);
 void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc);
-void removeQuantoren(formula * formulaElement);
 
 
 int nameCounter = 1;
+bool renamed = false;
 int nameCounterSkolem = 1;
 char * selectedVarFunc;
 int indexAllVar = 0;
 char * allVar[255];
+int excounter = 0;
 
 /* apply operations */
 formula * nnf(formula * formulaElement)
@@ -180,11 +181,12 @@ void renameRule(formula * formulaElement)
     }
 
     /* check for all */
-    if(formulaElement -> typS == type_all)
+    if(formulaElement -> typS == type_all || formulaElement -> typS == type_ex)
     {
         selectedVarFunc = malloc(strlen(formulaElement -> varfunc) + 1);
         strncpy(selectedVarFunc, formulaElement -> varfunc, strlen(formulaElement -> varfunc) + 1);
 
+        formulaElement -> varfunc = malloc(strlen("  ") + 1);
         snprintf(formulaElement -> varfunc, 3, "v%d", nameCounter);
 
         if(formulaElement -> list != NULL)
@@ -196,12 +198,13 @@ void renameRule(formula * formulaElement)
         {
             renameSubFormula(formulaElement -> subL, selectedVarFunc);
         }
+
         if(formulaElement -> subR != NULL)
         {
             renameSubFormula(formulaElement -> subR, selectedVarFunc);
         }
         nameCounter++;
-    } 
+    }
 }
 
 /* function to rename subformula */
@@ -211,12 +214,13 @@ void renameSubFormula(formula * formulaElement, char * selectedVarFunc)
     {
         if(strcmp(formulaElement -> varfunc, selectedVarFunc) == 0)
         {
+            formulaElement -> varfunc = malloc(strlen("  ") + 1);
             snprintf(formulaElement -> varfunc, 3, "v%d", nameCounter);
         }
     }
     if(formulaElement -> list != NULL)
     {
-        renameTermList(formulaElement ->list, selectedVarFunc);
+        renameTermList(formulaElement -> list, selectedVarFunc);
     }
     if(formulaElement -> subL != NULL)
     {
@@ -231,6 +235,7 @@ void renameSubFormula(formula * formulaElement, char * selectedVarFunc)
 /* rename term */
 void renameTerm(term * termElement, char * selectedVarFunc)
 {
+    termElement -> varfunc = malloc(strlen("  ") + 1);
     snprintf(termElement -> varfunc, 3, "v%d", nameCounter);
 
     if(termElement -> list != NULL)
@@ -300,12 +305,14 @@ void skolemizationRule(formula * formulaElement)
         }
 
         /* remove from array */
-        //allVar[indexAllVar] = NULL;
-        //indexAllVar--;
+        allVar[indexAllVar] = NULL;
+        indexAllVar--;
     }
     /* check ex with all */
     else if(formulaElement -> typS == type_ex && indexAllVar != 0)
     {
+        excounter++;
+
         selectedVarFunc = malloc(strlen(formulaElement -> varfunc) + 1);
         strncpy(selectedVarFunc, formulaElement -> varfunc, strlen(formulaElement -> varfunc) + 1);
 
@@ -330,7 +337,6 @@ void skolemizationRule(formula * formulaElement)
         }
     }
 
-
     /* check for subformula left and right */
     if(formulaElement -> subL != NULL)
     {
@@ -340,8 +346,6 @@ void skolemizationRule(formula * formulaElement)
     {
         skolemizationRule(formulaElement -> subR);
     }
-
-    
 }
 
 /* function to rename subformula for skolem */
@@ -351,26 +355,32 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc)
     {
         if(strcmp(formulaElement -> varfunc, selectedVarFunc) == 0)
         {
-            snprintf(formulaElement -> varfunc, 3, "v%d", nameCounter);
+            formulaElement -> varfunc = malloc(strlen("  ") + 1);
+            snprintf(formulaElement -> varfunc, 3, "f%d", nameCounterSkolem);
         }
     }
-    if(formulaElement -> list != NULL)
+    if(formulaElement -> list != NULL && indexAllVar != 0)
     {
-        renameTermList(formulaElement ->list, selectedVarFunc);
+        renameTermListSkolemAll(formulaElement ->list, selectedVarFunc);
+    }
+    else if(formulaElement -> list != NULL && indexAllVar == 0)
+    {
+        renameTermListSkolem(formulaElement ->list, selectedVarFunc);
     }
     if(formulaElement -> subL != NULL)
     {
-        renameSubFormula(formulaElement -> subL, selectedVarFunc);
+        renameSubFormulaSkolem(formulaElement -> subL, selectedVarFunc);
     }
     if(formulaElement -> subR != NULL)
     {
-        renameSubFormula(formulaElement -> subR, selectedVarFunc);
+        renameSubFormulaSkolem(formulaElement -> subR, selectedVarFunc);
     }
 }
 
 /* rename term for skolem*/
 void renameTermSkolem(term * termElement, char * selectedVarFunc)
 {
+    termElement -> varfunc = malloc(strlen("  ") + 1);
     snprintf(termElement -> varfunc, 3, "f%d", nameCounterSkolem);
 
     if(termElement -> list != NULL)
@@ -397,14 +407,20 @@ void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc)
 {
     if(strcmp(termListElement -> first -> varfunc, selectedVarFunc) == 0)
     {
+        for(int i=0; i<indexAllVar; i++)
+        {
+            printf("%s\n", allVar[i]);
+        }
+        printf("\n\n");
+
         term * tmpTerm;
         termList * tmpList;
         termList * tmpList2;
-        for(int idx = indexAllVar-1; idx >= 0; idx--)
+        for(int idx = 0; idx < indexAllVar; idx++)
         {
             term * tmpTerm = createTerm(allVar[idx], NULL);
 
-            if(idx == indexAllVar-1)
+            if(idx == 0)
             {
                 tmpList = createTermList(tmpTerm, NULL);
             }
@@ -414,33 +430,13 @@ void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc)
             }
             tmpList2 = tmpList;
         }
+        char * tmpString= malloc(strlen("  ") + 1);
+        snprintf(tmpString, 3, "f%d", excounter);
 
-        termListElement -> first = createTerm("f", tmpList);
+        termListElement -> first = createTerm(tmpString, tmpList);
     }
     if(termListElement -> next != NULL)
     {
         renameTermListSkolemAll(termListElement -> next, selectedVarFunc);
     }
-}
-
-void removeQuantoren(formula * formulaElement)
-{
-	/* check for subformula left and right */
-    if(formulaElement -> subL != NULL)
-    {
-        removeQuantoren(formulaElement -> subL);
-    }
-    if(formulaElement -> subR != NULL)
-    {
-        removeQuantoren(formulaElement -> subR);
-    }
-
-    /* check for all and ex */
-    if(formulaElement -> typS == type_all || formulaElement -> typS == type_ex)
-    {
-	
-		
-		
-	}
-	
 }
