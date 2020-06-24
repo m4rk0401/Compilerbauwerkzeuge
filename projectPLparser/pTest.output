@@ -1,0 +1,562 @@
+Grammar
+
+    0 $accept: stmtseq $end
+
+    1 stmtseq: %empty
+    2        | NEWLINE stmtseq
+    3        | stmt NEWLINE stmtseq
+
+    4 stmt: formula
+
+    5 term: VARIABLE
+    6     | FUNCTION
+    7     | FUNCTION OPENPAR termArgs CLOSEPAR
+
+    8 termArgs: term
+    9         | term KOMMA termArgs
+
+   10 atom: PRAEDICATE
+   11     | PRAEDICATE OPENPAR termArgs CLOSEPAR
+
+   12 formula: atom
+   13        | TOP
+   14        | BOTTOM
+   15        | ALL VARIABLE formula
+   16        | EX VARIABLE formula
+   17        | formula AND formula
+   18        | formula OR formula
+   19        | formula IMP formula
+   20        | formula BIIMP formula
+   21        | NOT formula
+   22        | OPENPAR formula CLOSEPAR
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+OPENPAR (258) 7 11 22
+CLOSEPAR (259) 7 11 22
+KOMMA (260) 9
+NEWLINE (261) 2 3
+BIIMP (262) 20
+IMP (263) 19
+OR (264) 18
+AND (265) 17
+NOT (266) 21
+ALL (267) 15
+EX (268) 16
+PRAEDICATE (269) 10 11
+FUNCTION (270) 6 7
+VARIABLE (271) 5 15 16
+TOP (272) 13
+BOTTOM (273) 14
+
+
+Nonterminals, with rules where they appear
+
+$accept (19)
+    on left: 0
+stmtseq (20)
+    on left: 1 2 3, on right: 0 2 3
+stmt (21)
+    on left: 4, on right: 3
+term (22)
+    on left: 5 6 7, on right: 8 9
+termArgs (23)
+    on left: 8 9, on right: 7 9 11
+atom (24)
+    on left: 10 11, on right: 12
+formula (25)
+    on left: 12 13 14 15 16 17 18 19 20 21 22, on right: 4 15 16 17
+    18 19 20 21 22
+
+
+State 0
+
+    0 $accept: . stmtseq $end
+
+    OPENPAR     shift, and go to state 1
+    NEWLINE     shift, and go to state 2
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    $default  reduce using rule 1 (stmtseq)
+
+    stmtseq  go to state 9
+    stmt     go to state 10
+    atom     go to state 11
+    formula  go to state 12
+
+
+State 1
+
+   22 formula: OPENPAR . formula CLOSEPAR
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 13
+
+
+State 2
+
+    2 stmtseq: NEWLINE . stmtseq
+
+    OPENPAR     shift, and go to state 1
+    NEWLINE     shift, and go to state 2
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    $default  reduce using rule 1 (stmtseq)
+
+    stmtseq  go to state 14
+    stmt     go to state 10
+    atom     go to state 11
+    formula  go to state 12
+
+
+State 3
+
+   21 formula: NOT . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 15
+
+
+State 4
+
+   15 formula: ALL . VARIABLE formula
+
+    VARIABLE  shift, and go to state 16
+
+
+State 5
+
+   16 formula: EX . VARIABLE formula
+
+    VARIABLE  shift, and go to state 17
+
+
+State 6
+
+   10 atom: PRAEDICATE .
+   11     | PRAEDICATE . OPENPAR termArgs CLOSEPAR
+
+    OPENPAR  shift, and go to state 18
+
+    $default  reduce using rule 10 (atom)
+
+
+State 7
+
+   13 formula: TOP .
+
+    $default  reduce using rule 13 (formula)
+
+
+State 8
+
+   14 formula: BOTTOM .
+
+    $default  reduce using rule 14 (formula)
+
+
+State 9
+
+    0 $accept: stmtseq . $end
+
+    $end  shift, and go to state 19
+
+
+State 10
+
+    3 stmtseq: stmt . NEWLINE stmtseq
+
+    NEWLINE  shift, and go to state 20
+
+
+State 11
+
+   12 formula: atom .
+
+    $default  reduce using rule 12 (formula)
+
+
+State 12
+
+    4 stmt: formula .
+   17 formula: formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+
+    BIIMP  shift, and go to state 21
+    IMP    shift, and go to state 22
+    OR     shift, and go to state 23
+    AND    shift, and go to state 24
+
+    $default  reduce using rule 4 (stmt)
+
+
+State 13
+
+   17 formula: formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+   22        | OPENPAR formula . CLOSEPAR
+
+    CLOSEPAR  shift, and go to state 25
+    BIIMP     shift, and go to state 21
+    IMP       shift, and go to state 22
+    OR        shift, and go to state 23
+    AND       shift, and go to state 24
+
+
+State 14
+
+    2 stmtseq: NEWLINE stmtseq .
+
+    $default  reduce using rule 2 (stmtseq)
+
+
+State 15
+
+   17 formula: formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+   21        | NOT formula .
+
+    $default  reduce using rule 21 (formula)
+
+
+State 16
+
+   15 formula: ALL VARIABLE . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 26
+
+
+State 17
+
+   16 formula: EX VARIABLE . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 27
+
+
+State 18
+
+   11 atom: PRAEDICATE OPENPAR . termArgs CLOSEPAR
+
+    FUNCTION  shift, and go to state 28
+    VARIABLE  shift, and go to state 29
+
+    term      go to state 30
+    termArgs  go to state 31
+
+
+State 19
+
+    0 $accept: stmtseq $end .
+
+    $default  accept
+
+
+State 20
+
+    3 stmtseq: stmt NEWLINE . stmtseq
+
+    OPENPAR     shift, and go to state 1
+    NEWLINE     shift, and go to state 2
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    $default  reduce using rule 1 (stmtseq)
+
+    stmtseq  go to state 32
+    stmt     go to state 10
+    atom     go to state 11
+    formula  go to state 12
+
+
+State 21
+
+   20 formula: formula BIIMP . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 33
+
+
+State 22
+
+   19 formula: formula IMP . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 34
+
+
+State 23
+
+   18 formula: formula OR . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 35
+
+
+State 24
+
+   17 formula: formula AND . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 3
+    ALL         shift, and go to state 4
+    EX          shift, and go to state 5
+    PRAEDICATE  shift, and go to state 6
+    TOP         shift, and go to state 7
+    BOTTOM      shift, and go to state 8
+
+    atom     go to state 11
+    formula  go to state 36
+
+
+State 25
+
+   22 formula: OPENPAR formula CLOSEPAR .
+
+    $default  reduce using rule 22 (formula)
+
+
+State 26
+
+   15 formula: ALL VARIABLE formula .
+   17        | formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+
+    $default  reduce using rule 15 (formula)
+
+
+State 27
+
+   16 formula: EX VARIABLE formula .
+   17        | formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+
+    $default  reduce using rule 16 (formula)
+
+
+State 28
+
+    6 term: FUNCTION .
+    7     | FUNCTION . OPENPAR termArgs CLOSEPAR
+
+    OPENPAR  shift, and go to state 37
+
+    $default  reduce using rule 6 (term)
+
+
+State 29
+
+    5 term: VARIABLE .
+
+    $default  reduce using rule 5 (term)
+
+
+State 30
+
+    8 termArgs: term .
+    9         | term . KOMMA termArgs
+
+    KOMMA  shift, and go to state 38
+
+    $default  reduce using rule 8 (termArgs)
+
+
+State 31
+
+   11 atom: PRAEDICATE OPENPAR termArgs . CLOSEPAR
+
+    CLOSEPAR  shift, and go to state 39
+
+
+State 32
+
+    3 stmtseq: stmt NEWLINE stmtseq .
+
+    $default  reduce using rule 3 (stmtseq)
+
+
+State 33
+
+   17 formula: formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+   20        | formula BIIMP formula .
+
+    IMP  shift, and go to state 22
+    OR   shift, and go to state 23
+    AND  shift, and go to state 24
+
+    $default  reduce using rule 20 (formula)
+
+
+State 34
+
+   17 formula: formula . AND formula
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   19        | formula IMP formula .
+   20        | formula . BIIMP formula
+
+    OR   shift, and go to state 23
+    AND  shift, and go to state 24
+
+    $default  reduce using rule 19 (formula)
+
+
+State 35
+
+   17 formula: formula . AND formula
+   18        | formula . OR formula
+   18        | formula OR formula .
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+
+    AND  shift, and go to state 24
+
+    $default  reduce using rule 18 (formula)
+
+
+State 36
+
+   17 formula: formula . AND formula
+   17        | formula AND formula .
+   18        | formula . OR formula
+   19        | formula . IMP formula
+   20        | formula . BIIMP formula
+
+    $default  reduce using rule 17 (formula)
+
+
+State 37
+
+    7 term: FUNCTION OPENPAR . termArgs CLOSEPAR
+
+    FUNCTION  shift, and go to state 28
+    VARIABLE  shift, and go to state 29
+
+    term      go to state 30
+    termArgs  go to state 40
+
+
+State 38
+
+    9 termArgs: term KOMMA . termArgs
+
+    FUNCTION  shift, and go to state 28
+    VARIABLE  shift, and go to state 29
+
+    term      go to state 30
+    termArgs  go to state 41
+
+
+State 39
+
+   11 atom: PRAEDICATE OPENPAR termArgs CLOSEPAR .
+
+    $default  reduce using rule 11 (atom)
+
+
+State 40
+
+    7 term: FUNCTION OPENPAR termArgs . CLOSEPAR
+
+    CLOSEPAR  shift, and go to state 42
+
+
+State 41
+
+    9 termArgs: term KOMMA termArgs .
+
+    $default  reduce using rule 9 (termArgs)
+
+
+State 42
+
+    7 term: FUNCTION OPENPAR termArgs CLOSEPAR .
+
+    $default  reduce using rule 7 (term)

@@ -1,0 +1,1 @@
+all z ( (ex x (P(x) & Q(x,z)) | ex y (~P(y) & ~Q(z,y))) & (P(z) & Q(z,z) | (all x ex y(Q(z,y) & Q(z,x)))) |  all r ex s (P(r) | P(s) -> Q(x,r) & Q(x,s)) & (ex x (Q(x,z) & Q(x,x)) | (ex x Q(x,z) & ex y Q(z,y))))

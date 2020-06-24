@@ -1,0 +1,231 @@
+scanning EX
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning AND
+scanning predicate Q22
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable y2
+reducing variable to term y2
+scanning closing brackets
+reducing last term to term sequence (y2)
+reducing to term sequence (x,y2)
+reducing to atom Q22(x,y2)
+reducing to conjunction (AND P(x) Q22(x,y2))
+scanning closing brackets
+reducing to brackets (AND P(x) Q22(x,y2))
+reducing to existential formula (EX x (AND P(x) Q22(x,y2)))
+scanning OR
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom Q(x)
+scanning EQUIVALENCE
+reducing to disjunction (OR (EX x (AND P(x) Q22(x,y2))) Q(x))
+scanning NOT
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to negation (NOT P(x))
+scanning IMPLICATION
+scanning BOTTOM
+reducing to boolean constant BOTTOM
+reducing to implication ((NOT P(x)) IMPLIES BOTTOM)
+reducing to equivalence ((OR (EX x (AND P(x) Q22(x,y2))) Q(x)) EQUIV ((NOT P(x)) IMPLIES BOTTOM))
+storing result.
+
+Original formula:
+EQUIV
+ OR
+  EX x
+   AND
+    P(x)
+    Q22(x,y2)
+  Q(x)
+ IMPLIES
+  NOT
+   P(x)
+  BOTTOM
+
+Without arrows:
+AND
+ OR
+  OR
+   EX x
+    AND
+     P(x)
+     Q22(x,y2)
+   Q(x)
+  NOT
+   OR
+    BOTTOM
+    NOT
+     NOT
+      P(x)
+ OR
+  OR
+   BOTTOM
+   NOT
+    NOT
+     P(x)
+  NOT
+   OR
+    EX x
+     AND
+      P(x)
+      Q22(x,y2)
+    Q(x)
+
+NNF:
+AND
+ OR
+  OR
+   EX x
+    AND
+     P(x)
+     Q22(x,y2)
+   Q(x)
+  AND
+   TOP
+   NOT
+    P(x)
+ OR
+  OR
+   BOTTOM
+   P(x)
+  AND
+   ALL x
+    OR
+     NOT
+      P(x)
+     NOT
+      Q22(x,y2)
+   NOT
+    Q(x)
+
+Renamed Variables:
+AND
+ OR
+  OR
+   EX v1
+    AND
+     P(v1)
+     Q22(v1,y2)
+   Q(x)
+  AND
+   TOP
+   NOT
+    P(x)
+ OR
+  OR
+   BOTTOM
+   P(x)
+  AND
+   ALL v2
+    OR
+     NOT
+      P(v2)
+     NOT
+      Q22(v2,y2)
+   NOT
+    Q(x)
+
+Skolemised:
+AND
+ OR
+  OR
+   AND
+    P(f1)
+    Q22(f1,y2)
+   Q(x)
+  AND
+   TOP
+   NOT
+    P(x)
+ OR
+  OR
+   BOTTOM
+   P(x)
+  AND
+   ALL v2
+    OR
+     NOT
+      P(v2)
+     NOT
+      Q22(v2,y2)
+   NOT
+    Q(x)
+
+Universal quantifiers removed:
+AND
+ OR
+  OR
+   AND
+    P(f1)
+    Q22(f1,y2)
+   Q(x)
+  AND
+   TOP
+   NOT
+    P(x)
+ OR
+  OR
+   BOTTOM
+   P(x)
+  AND
+   OR
+    NOT
+     P(v2)
+    NOT
+     Q22(v2,y2)
+   NOT
+    Q(x)
+
+KNF:
+AND
+ OR
+  P(f1)
+  Q(x)
+  TOP
+ OR
+  Q22(f1,y2)
+  Q(x)
+  TOP
+ OR
+  P(f1)
+  Q(x)
+  NOT
+   P(x)
+ OR
+  Q22(f1,y2)
+  Q(x)
+  NOT
+   P(x)
+ OR
+  BOTTOM
+  P(x)
+  NOT
+   Q22(v2,y2)
+  NOT
+   P(v2)
+ OR
+  BOTTOM
+  P(x)
+  NOT
+   Q(x)

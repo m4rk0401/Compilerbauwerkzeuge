@@ -1,0 +1,47 @@
+ 
+scanning top
+reducing boolean TOP  TOP to formula
+scanning AND
+scanning allquantor
+scanning variable x
+scanning top
+reducing boolean TOP  TOP to formula
+reducing to all formula (ALL x TOP)
+reducing to conjunction ( TOP AND (ALL x TOP))
+scanning OR
+scanning predicate Q
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function g
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning comma
+scanning function h
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning comma
+scanning variable y
+reducing variable y to term
+scanning comma
+scanning variable z
+reducing variable z to term
+scanning close brackets
+reducing last term z to term sequence
+reducing term y,z to term sequence
+reducing term x,y,z to term sequence
+reducing to term h(x,y,z)
+scanning close brackets
+reducing last term h(x,y,z) to term sequence
+reducing term x,h(x,y,z) to term sequence
+reducing to term g(x,h(x,y,z))
+scanning close brackets
+reducing last term g(x,h(x,y,z)) to term sequence
+reducing to term f(g(x,h(x,y,z)))
+scanning close brackets
+reducing to atom Q(f(g(x,h(x,y,z))))
+reducing atom Q(f(g(x,h(x,y,z)))) to formula
+reducing to disjunction (( TOP AND (ALL x TOP)) OR Q(f(g(x,h(x,y,z)))))
+Error: syntax error

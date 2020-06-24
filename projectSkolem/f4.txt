@@ -1,0 +1,1 @@
+ex v1 P(v1) & all v2 ex v3 S(v2,v3)

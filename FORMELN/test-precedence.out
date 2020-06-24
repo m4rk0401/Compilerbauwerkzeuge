@@ -1,0 +1,35 @@
+scanning predicate X
+scanning AND
+reducing to nullary atom X
+scanning predicate Z
+scanning IMPLICATION
+reducing to nullary atom Z
+reducing to conjunction (X AND Z)
+scanning predicate Y
+reducing to nullary atom Y
+reducing to implication ((X AND Z) IMPLIES Y)
+storing result.
+
+Original formula:
+IMPLIES
+ AND
+  X
+  Z
+ Y
+
+Without arrows:
+OR
+ NOT
+  AND
+   X
+   Z
+ Y
+
+NNF:
+OR
+ OR
+  NOT
+   X
+  NOT
+   Z
+ Y

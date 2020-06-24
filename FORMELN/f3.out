@@ -1,0 +1,70 @@
+scanning TOP
+reducing to boolean constant TOP
+scanning AND
+scanning ALL
+scanning variable x
+scanning TOP
+reducing to boolean constant TOP
+reducing to universal formula (ALL x TOP)
+reducing to conjunction (TOP AND (ALL x TOP))
+scanning OR
+scanning predicate Q
+scanning opening brackets
+scanning function f
+scanning opening brackets
+scanning function g
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning function h
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (y,z)
+reducing to term sequence (x,y,z)
+reducing function to term h(x,y,z)
+scanning closing brackets
+reducing last term to term sequence (h(x,y,z))
+reducing to term sequence (x,h(x,y,z))
+reducing function to term g(x,h(x,y,z))
+scanning closing brackets
+reducing last term to term sequence (g(x,h(x,y,z)))
+reducing function to term f(g(x,h(x,y,z)))
+scanning closing brackets
+reducing last term to term sequence (f(g(x,h(x,y,z))))
+reducing to atom Q(f(g(x,h(x,y,z))))
+reducing to disjunction ((TOP AND (ALL x TOP)) OR Q(f(g(x,h(x,y,z)))))
+storing result.
+
+Original formula:
+OR
+ AND
+  TOP
+  ALL x
+   TOP
+ Q(f(g(x,h(x,y,z))))
+
+Without arrows:
+OR
+ AND
+  TOP
+  ALL x
+   TOP
+ Q(f(g(x,h(x,y,z))))
+
+NNF:
+OR
+ AND
+  TOP
+  ALL x
+   TOP
+ Q(f(g(x,h(x,y,z))))

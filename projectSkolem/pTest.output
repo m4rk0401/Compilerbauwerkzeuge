@@ -1,0 +1,474 @@
+Terminals unused in grammar
+
+   NEWLINE
+
+
+Grammar
+
+    0 $accept: start $end
+
+    1 start: formula
+
+    2 term: VARIABLE
+    3     | FUNCTION
+    4     | FUNCTION OPENPAR termList CLOSEPAR
+
+    5 termList: term
+    6         | term KOMMA termList
+
+    7 formula: PRAEDICATE
+    8        | PRAEDICATE OPENPAR termList CLOSEPAR
+    9        | TOP
+   10        | BOTTOM
+   11        | ALL VARIABLE formula
+   12        | EX VARIABLE formula
+   13        | formula AND formula
+   14        | formula OR formula
+   15        | formula IMP formula
+   16        | formula EQU formula
+   17        | NOT formula
+   18        | OPENPAR formula CLOSEPAR
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+OPENPAR (258) 4 8 18
+CLOSEPAR (259) 4 8 18
+KOMMA (260) 6
+NEWLINE (261)
+EQU (262) 16
+IMP (263) 15
+OR (264) 14
+AND (265) 13
+NOT (266) 17
+ALL (267) 11
+EX (268) 12
+PRAEDICATE (269) 7 8
+FUNCTION (270) 3 4
+VARIABLE (271) 2 11 12
+TOP (272) 9
+BOTTOM (273) 10
+
+
+Nonterminals, with rules where they appear
+
+$accept (19)
+    on left: 0
+start (20)
+    on left: 1, on right: 0
+term (21)
+    on left: 2 3 4, on right: 5 6
+termList (22)
+    on left: 5 6, on right: 4 6 8
+formula (23)
+    on left: 7 8 9 10 11 12 13 14 15 16 17 18, on right: 1 11 12 13
+    14 15 16 17 18
+
+
+State 0
+
+    0 $accept: . start $end
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    start    go to state 8
+    formula  go to state 9
+
+
+State 1
+
+   18 formula: OPENPAR . formula CLOSEPAR
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 10
+
+
+State 2
+
+   17 formula: NOT . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 11
+
+
+State 3
+
+   11 formula: ALL . VARIABLE formula
+
+    VARIABLE  shift, and go to state 12
+
+
+State 4
+
+   12 formula: EX . VARIABLE formula
+
+    VARIABLE  shift, and go to state 13
+
+
+State 5
+
+    7 formula: PRAEDICATE .
+    8        | PRAEDICATE . OPENPAR termList CLOSEPAR
+
+    OPENPAR  shift, and go to state 14
+
+    $default  reduce using rule 7 (formula)
+
+
+State 6
+
+    9 formula: TOP .
+
+    $default  reduce using rule 9 (formula)
+
+
+State 7
+
+   10 formula: BOTTOM .
+
+    $default  reduce using rule 10 (formula)
+
+
+State 8
+
+    0 $accept: start . $end
+
+    $end  shift, and go to state 15
+
+
+State 9
+
+    1 start: formula .
+   13 formula: formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+
+    EQU  shift, and go to state 16
+    IMP  shift, and go to state 17
+    OR   shift, and go to state 18
+    AND  shift, and go to state 19
+
+    $default  reduce using rule 1 (start)
+
+
+State 10
+
+   13 formula: formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+   18        | OPENPAR formula . CLOSEPAR
+
+    CLOSEPAR  shift, and go to state 20
+    EQU       shift, and go to state 16
+    IMP       shift, and go to state 17
+    OR        shift, and go to state 18
+    AND       shift, and go to state 19
+
+
+State 11
+
+   13 formula: formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+   17        | NOT formula .
+
+    $default  reduce using rule 17 (formula)
+
+
+State 12
+
+   11 formula: ALL VARIABLE . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 21
+
+
+State 13
+
+   12 formula: EX VARIABLE . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 22
+
+
+State 14
+
+    8 formula: PRAEDICATE OPENPAR . termList CLOSEPAR
+
+    FUNCTION  shift, and go to state 23
+    VARIABLE  shift, and go to state 24
+
+    term      go to state 25
+    termList  go to state 26
+
+
+State 15
+
+    0 $accept: start $end .
+
+    $default  accept
+
+
+State 16
+
+   16 formula: formula EQU . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 27
+
+
+State 17
+
+   15 formula: formula IMP . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 28
+
+
+State 18
+
+   14 formula: formula OR . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 29
+
+
+State 19
+
+   13 formula: formula AND . formula
+
+    OPENPAR     shift, and go to state 1
+    NOT         shift, and go to state 2
+    ALL         shift, and go to state 3
+    EX          shift, and go to state 4
+    PRAEDICATE  shift, and go to state 5
+    TOP         shift, and go to state 6
+    BOTTOM      shift, and go to state 7
+
+    formula  go to state 30
+
+
+State 20
+
+   18 formula: OPENPAR formula CLOSEPAR .
+
+    $default  reduce using rule 18 (formula)
+
+
+State 21
+
+   11 formula: ALL VARIABLE formula .
+   13        | formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+
+    $default  reduce using rule 11 (formula)
+
+
+State 22
+
+   12 formula: EX VARIABLE formula .
+   13        | formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+
+    $default  reduce using rule 12 (formula)
+
+
+State 23
+
+    3 term: FUNCTION .
+    4     | FUNCTION . OPENPAR termList CLOSEPAR
+
+    OPENPAR  shift, and go to state 31
+
+    $default  reduce using rule 3 (term)
+
+
+State 24
+
+    2 term: VARIABLE .
+
+    $default  reduce using rule 2 (term)
+
+
+State 25
+
+    5 termList: term .
+    6         | term . KOMMA termList
+
+    KOMMA  shift, and go to state 32
+
+    $default  reduce using rule 5 (termList)
+
+
+State 26
+
+    8 formula: PRAEDICATE OPENPAR termList . CLOSEPAR
+
+    CLOSEPAR  shift, and go to state 33
+
+
+State 27
+
+   13 formula: formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+   16        | formula EQU formula .
+
+    IMP  shift, and go to state 17
+    OR   shift, and go to state 18
+    AND  shift, and go to state 19
+
+    $default  reduce using rule 16 (formula)
+
+
+State 28
+
+   13 formula: formula . AND formula
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   15        | formula IMP formula .
+   16        | formula . EQU formula
+
+    OR   shift, and go to state 18
+    AND  shift, and go to state 19
+
+    $default  reduce using rule 15 (formula)
+
+
+State 29
+
+   13 formula: formula . AND formula
+   14        | formula . OR formula
+   14        | formula OR formula .
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+
+    AND  shift, and go to state 19
+
+    $default  reduce using rule 14 (formula)
+
+
+State 30
+
+   13 formula: formula . AND formula
+   13        | formula AND formula .
+   14        | formula . OR formula
+   15        | formula . IMP formula
+   16        | formula . EQU formula
+
+    $default  reduce using rule 13 (formula)
+
+
+State 31
+
+    4 term: FUNCTION OPENPAR . termList CLOSEPAR
+
+    FUNCTION  shift, and go to state 23
+    VARIABLE  shift, and go to state 24
+
+    term      go to state 25
+    termList  go to state 34
+
+
+State 32
+
+    6 termList: term KOMMA . termList
+
+    FUNCTION  shift, and go to state 23
+    VARIABLE  shift, and go to state 24
+
+    term      go to state 25
+    termList  go to state 35
+
+
+State 33
+
+    8 formula: PRAEDICATE OPENPAR termList CLOSEPAR .
+
+    $default  reduce using rule 8 (formula)
+
+
+State 34
+
+    4 term: FUNCTION OPENPAR termList . CLOSEPAR
+
+    CLOSEPAR  shift, and go to state 36
+
+
+State 35
+
+    6 termList: term KOMMA termList .
+
+    $default  reduce using rule 6 (termList)
+
+
+State 36
+
+    4 term: FUNCTION OPENPAR termList CLOSEPAR .
+
+    $default  reduce using rule 4 (term)

@@ -1,0 +1,422 @@
+scanning opening brackets
+scanning ALL
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning closing brackets
+reducing to brackets P(x)
+reducing to universal formula (ALL x P(x))
+scanning EQUIVALENCE
+scanning EX
+scanning variable x
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to existential formula (EX x P(x))
+scanning closing brackets
+reducing to equivalence ((ALL x P(x)) EQUIV (EX x P(x)))
+reducing to brackets ((ALL x P(x)) EQUIV (EX x P(x)))
+scanning EQUIVALENCE
+scanning ALL
+scanning variable x
+scanning opening brackets
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom Q(x)
+scanning EQUIVALENCE
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning closing brackets
+reducing to equivalence (Q(x) EQUIV P(x))
+reducing to brackets (Q(x) EQUIV P(x))
+reducing to universal formula (ALL x (Q(x) EQUIV P(x)))
+reducing to equivalence (((ALL x P(x)) EQUIV (EX x P(x))) EQUIV (ALL x (Q(x) EQUIV P(x))))
+storing result.
+
+Original formula:
+EQUIV
+ EQUIV
+  ALL x
+   P(x)
+  EX x
+   P(x)
+ ALL x
+  EQUIV
+   Q(x)
+   P(x)
+
+Without arrows:
+AND
+ OR
+  AND
+   OR
+    ALL x
+     P(x)
+    NOT
+     EX x
+      P(x)
+   OR
+    EX x
+     P(x)
+    NOT
+     ALL x
+      P(x)
+  NOT
+   ALL x
+    AND
+     OR
+      Q(x)
+      NOT
+       P(x)
+     OR
+      P(x)
+      NOT
+       Q(x)
+ OR
+  ALL x
+   AND
+    OR
+     Q(x)
+     NOT
+      P(x)
+    OR
+     P(x)
+     NOT
+      Q(x)
+  NOT
+   AND
+    OR
+     ALL x
+      P(x)
+     NOT
+      EX x
+       P(x)
+    OR
+     EX x
+      P(x)
+     NOT
+      ALL x
+       P(x)
+
+NNF:
+AND
+ OR
+  AND
+   OR
+    ALL x
+     P(x)
+    ALL x
+     NOT
+      P(x)
+   OR
+    EX x
+     P(x)
+    EX x
+     NOT
+      P(x)
+  EX x
+   OR
+    AND
+     NOT
+      Q(x)
+     P(x)
+    AND
+     NOT
+      P(x)
+     Q(x)
+ OR
+  ALL x
+   AND
+    OR
+     Q(x)
+     NOT
+      P(x)
+    OR
+     P(x)
+     NOT
+      Q(x)
+  OR
+   AND
+    EX x
+     NOT
+      P(x)
+    EX x
+     P(x)
+   AND
+    ALL x
+     NOT
+      P(x)
+    ALL x
+     P(x)
+
+Renamed Variables:
+AND
+ OR
+  AND
+   OR
+    ALL v1
+     P(v1)
+    ALL v2
+     NOT
+      P(v2)
+   OR
+    EX v3
+     P(v3)
+    EX v4
+     NOT
+      P(v4)
+  EX v5
+   OR
+    AND
+     NOT
+      Q(v5)
+     P(v5)
+    AND
+     NOT
+      P(v5)
+     Q(v5)
+ OR
+  ALL v6
+   AND
+    OR
+     Q(v6)
+     NOT
+      P(v6)
+    OR
+     P(v6)
+     NOT
+      Q(v6)
+  OR
+   AND
+    EX v7
+     NOT
+      P(v7)
+    EX v8
+     P(v8)
+   AND
+    ALL v9
+     NOT
+      P(v9)
+    ALL v10
+     P(v10)
+
+Skolemised:
+AND
+ OR
+  AND
+   OR
+    ALL v1
+     P(v1)
+    ALL v2
+     NOT
+      P(v2)
+   OR
+    P(f1)
+    NOT
+     P(f2)
+  OR
+   AND
+    NOT
+     Q(f3)
+    P(f3)
+   AND
+    NOT
+     P(f3)
+    Q(f3)
+ OR
+  ALL v6
+   AND
+    OR
+     Q(v6)
+     NOT
+      P(v6)
+    OR
+     P(v6)
+     NOT
+      Q(v6)
+  OR
+   AND
+    NOT
+     P(f4)
+    P(f5)
+   AND
+    ALL v9
+     NOT
+      P(v9)
+    ALL v10
+     P(v10)
+
+Universal quantifiers removed:
+AND
+ OR
+  AND
+   OR
+    P(v1)
+    NOT
+     P(v2)
+   OR
+    P(f1)
+    NOT
+     P(f2)
+  OR
+   AND
+    NOT
+     Q(f3)
+    P(f3)
+   AND
+    NOT
+     P(f3)
+    Q(f3)
+ OR
+  AND
+   OR
+    Q(v6)
+    NOT
+     P(v6)
+   OR
+    P(v6)
+    NOT
+     Q(v6)
+  OR
+   AND
+    NOT
+     P(f4)
+    P(f5)
+   AND
+    NOT
+     P(v9)
+    P(v10)
+
+KNF:
+AND
+ OR
+  NOT
+   P(v2)
+  P(v1)
+  P(f3)
+  NOT
+   P(f3)
+ OR
+  NOT
+   P(f2)
+  P(f1)
+  P(f3)
+  NOT
+   P(f3)
+ OR
+  NOT
+   P(v2)
+  P(v1)
+  NOT
+   Q(f3)
+  NOT
+   P(f3)
+ OR
+  NOT
+   P(f2)
+  P(f1)
+  NOT
+   Q(f3)
+  NOT
+   P(f3)
+ OR
+  NOT
+   P(v2)
+  P(v1)
+  P(f3)
+  Q(f3)
+ OR
+  NOT
+   P(f2)
+  P(f1)
+  P(f3)
+  Q(f3)
+ OR
+  NOT
+   P(v2)
+  P(v1)
+  NOT
+   Q(f3)
+  Q(f3)
+ OR
+  NOT
+   P(f2)
+  P(f1)
+  NOT
+   Q(f3)
+  Q(f3)
+ OR
+  NOT
+   P(v6)
+  Q(v6)
+  P(f5)
+  NOT
+   P(v9)
+ OR
+  NOT
+   Q(v6)
+  P(v6)
+  P(f5)
+  NOT
+   P(v9)
+ OR
+  NOT
+   P(v6)
+  Q(v6)
+  NOT
+   P(f4)
+  NOT
+   P(v9)
+ OR
+  NOT
+   Q(v6)
+  P(v6)
+  NOT
+   P(f4)
+  NOT
+   P(v9)
+ OR
+  NOT
+   P(v6)
+  Q(v6)
+  P(f5)
+  P(v10)
+ OR
+  NOT
+   Q(v6)
+  P(v6)
+  P(f5)
+  P(v10)
+ OR
+  NOT
+   P(v6)
+  Q(v6)
+  NOT
+   P(f4)
+  P(v10)
+ OR
+  NOT
+   Q(v6)
+  P(v6)
+  NOT
+   P(f4)
+  P(v10)

@@ -1,0 +1,41 @@
+scanning NOT
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning AND
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom Q(x)
+reducing to conjunction (P(x) AND Q(x))
+scanning closing brackets
+reducing to brackets (P(x) AND Q(x))
+reducing to negation (NOT (P(x) AND Q(x)))
+storing result.
+
+Original formula:
+NOT
+ AND
+  P(x)
+  Q(x)
+
+Without arrows:
+NOT
+ AND
+  P(x)
+  Q(x)
+
+NNF:
+OR
+ NOT
+  P(x)
+ NOT
+  Q(x)

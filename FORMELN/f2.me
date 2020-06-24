@@ -1,0 +1,72 @@
+ 
+scanning open brackets
+scanning allquantor
+scanning variable x
+scanning predicate P
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning close brackets
+reducing to atom P(x)
+reducing atom P(x) to formula
+reducing to all formula (ALL xP(x))
+scanning implikation
+scanning ex
+scanning variable x
+scanning predicate P
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning close brackets
+reducing to atom P(x)
+reducing atom P(x) to formula
+reducing to existential formula (EX xP(x))
+scanning close brackets
+reducing to implication ((ALL xP(x)) IMP (EX xP(x)))
+reducing (((ALL xP(x)) IMP (EX xP(x)))) to formula
+scanning AND
+scanning open brackets
+scanning predicate P
+scanning open brackets
+scanning function c
+scanning close brackets
+reducing to term c
+reducing to atom P(c)
+reducing atom P(c) to formula
+scanning OR
+scanning predicate P
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function c
+scanning close brackets
+reducing to term c
+reducing last term c to term sequence
+reducing to term f(c)
+scanning close brackets
+reducing to atom P(f(c))
+reducing atom P(f(c)) to formula
+scanning OR
+reducing to disjunction (P(c) OR P(f(c)))
+scanning predicate P
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function c
+scanning close brackets
+reducing to term c
+reducing last term c to term sequence
+reducing to term f(c)
+scanning close brackets
+reducing last term f(c) to term sequence
+reducing to term f(f(c))
+scanning close brackets
+reducing to atom P(f(f(c)))
+reducing atom P(f(f(c))) to formula
+scanning close brackets
+reducing to disjunction ((P(c) OR P(f(c))) OR P(f(f(c))))
+reducing (((P(c) OR P(f(c))) OR P(f(f(c))))) to formula
+reducing to conjunction ((((ALL xP(x)) IMP (EX xP(x)))) AND (((P(c) OR P(f(c))) OR P(f(f(c))))))
+Error: syntax error

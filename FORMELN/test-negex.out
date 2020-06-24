@@ -1,0 +1,28 @@
+scanning NOT
+scanning EX
+scanning variable x
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to existential formula (EX x P(x))
+reducing to negation (NOT (EX x P(x)))
+storing result.
+
+Original formula:
+NOT
+ EX x
+  P(x)
+
+Without arrows:
+NOT
+ EX x
+  P(x)
+
+NNF:
+ALL x
+ NOT
+  P(x)

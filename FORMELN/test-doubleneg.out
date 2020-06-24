@@ -1,0 +1,32 @@
+scanning NOT
+scanning NOT
+scanning predicate X
+scanning IMPLICATION
+reducing to nullary atom X
+reducing to negation (NOT X)
+reducing to negation (NOT (NOT X))
+scanning predicate Y
+reducing to nullary atom Y
+reducing to implication ((NOT (NOT X)) IMPLIES Y)
+storing result.
+
+Original formula:
+IMPLIES
+ NOT
+  NOT
+   X
+ Y
+
+Without arrows:
+OR
+ NOT
+  NOT
+   NOT
+    X
+ Y
+
+NNF:
+OR
+ NOT
+  X
+ Y

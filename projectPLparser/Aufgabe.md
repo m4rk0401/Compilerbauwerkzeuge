@@ -1,0 +1,1 @@
+Parser - nur Syntax-TestSchreiben Sie ein Bison-File f ̈ur einen Parser, der mit Hilfe Ihres Scannerseine Formel einliest und auf korrekte Syntax testet.Der Parser sollte zur Kontrolle die gelesenen Token und die angewendeteRegel ausgeben.

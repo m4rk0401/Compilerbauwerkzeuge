@@ -1,0 +1,34 @@
+scanning predicate X
+scanning EQUIVALENCE
+reducing to nullary atom X
+scanning predicate Y
+reducing to nullary atom Y
+reducing to equivalence (X EQUIV Y)
+storing result.
+
+Original formula:
+EQUIV
+ X
+ Y
+
+Without arrows:
+OR
+ AND
+  X
+  Y
+ AND
+  NOT
+   X
+  NOT
+   Y
+
+NNF:
+OR
+ AND
+  X
+  Y
+ AND
+  NOT
+   X
+  NOT
+   Y

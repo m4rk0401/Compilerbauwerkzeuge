@@ -1,0 +1,51 @@
+ 
+scanning ex
+scanning variable x
+scanning open brackets
+scanning predicate P
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning close brackets
+reducing to atom P(x)
+reducing atom P(x) to formula
+scanning AND
+scanning predicate Q22
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning comma
+scanning variable y2
+reducing variable y2 to term
+scanning close brackets
+reducing to atom Q22(x,y2)
+reducing atom Q22(x,y2) to formula
+reducing to conjunction (P(x) AND Q22(x,y2))
+scanning close brackets
+reducing ((P(x) AND Q22(x,y2))) to formula
+reducing to existential formula (EX x((P(x) AND Q22(x,y2))))
+scanning OR
+scanning predicate Q
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning close brackets
+reducing to atom Q(x)
+reducing atom Q(x) to formula
+scanning biimplikation
+reducing to disjunction ((EX x((P(x) AND Q22(x,y2)))) OR Q(x))
+scanning NOT
+scanning predicate P
+scanning open brackets
+scanning variable x
+reducing variable x to term
+scanning close brackets
+reducing to atom P(x)
+reducing atom P(x) to formula
+reducing to neagtion (NOT P(x))
+scanning implikation
+scanning bot
+reducing boolean BOT  BOTTOM to formula
+reducing to implication ((NOT P(x)) IMP  BOTTOM)
+reducing to equivalence (((EX x((P(x) AND Q22(x,y2)))) OR Q(x)) EQUIV ((NOT P(x)) IMP  BOTTOM))
+Error: syntax error

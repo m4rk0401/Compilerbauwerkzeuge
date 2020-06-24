@@ -1,0 +1,172 @@
+scanning opening brackets
+scanning ALL
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning closing brackets
+reducing to brackets P(x)
+reducing to universal formula (ALL x P(x))
+scanning EQUIVALENCE
+scanning EX
+scanning variable x
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to existential formula (EX x P(x))
+scanning closing brackets
+reducing to equivalence ((ALL x P(x)) EQUIV (EX x P(x)))
+reducing to brackets ((ALL x P(x)) EQUIV (EX x P(x)))
+scanning EQUIVALENCE
+scanning ALL
+scanning variable x
+scanning opening brackets
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom Q(x)
+scanning EQUIVALENCE
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning closing brackets
+reducing to equivalence (Q(x) EQUIV P(x))
+reducing to brackets (Q(x) EQUIV P(x))
+reducing to universal formula (ALL x (Q(x) EQUIV P(x)))
+reducing to equivalence (((ALL x P(x)) EQUIV (EX x P(x))) EQUIV (ALL x (Q(x) EQUIV P(x))))
+storing result.
+
+Original formula:
+(((ALL x P(x)) EQUIV (EX x P(x))) EQUIV (ALL x (Q(x) EQUIV P(x))))
+EQUIV
+ EQUIV
+  ALL x
+   P(x)
+  EX x
+   P(x)
+ ALL x
+  EQUIV
+   Q(x)
+   P(x)
+
+Without arrows:
+(((((ALL x P(x)) AND (EX x P(x))) OR ((NOT (ALL x P(x))) AND (NOT (EX x P(x))))) AND (ALL x ((Q(x) AND P(x)) OR ((NOT Q(x)) AND (NOT P(x)))))) OR ((NOT (((ALL x P(x)) AND (EX x P(x))) OR ((NOT (ALL x P(x))) AND (NOT (EX x P(x)))))) AND (NOT (ALL x ((Q(x) AND P(x)) OR ((NOT Q(x)) AND (NOT P(x))))))))
+OR
+ AND
+  OR
+   AND
+    ALL x
+     P(x)
+    EX x
+     P(x)
+   AND
+    NOT
+     ALL x
+      P(x)
+    NOT
+     EX x
+      P(x)
+  ALL x
+   OR
+    AND
+     Q(x)
+     P(x)
+    AND
+     NOT
+      Q(x)
+     NOT
+      P(x)
+ AND
+  NOT
+   OR
+    AND
+     ALL x
+      P(x)
+     EX x
+      P(x)
+    AND
+     NOT
+      ALL x
+       P(x)
+     NOT
+      EX x
+       P(x)
+  NOT
+   ALL x
+    OR
+     AND
+      Q(x)
+      P(x)
+     AND
+      NOT
+       Q(x)
+      NOT
+       P(x)
+
+NNF:
+(((((ALL x P(x)) AND (EX x P(x))) OR ((EX x (NOT P(x))) AND (ALL x (NOT P(x))))) AND (ALL x ((Q(x) AND P(x)) OR ((NOT Q(x)) AND (NOT P(x)))))) OR ((((EX x (NOT P(x))) OR (ALL x (NOT P(x)))) AND ((ALL x P(x)) OR (EX x P(x)))) AND (EX x (((NOT Q(x)) OR (NOT P(x))) AND (Q(x) OR P(x))))))
+OR
+ AND
+  OR
+   AND
+    ALL x
+     P(x)
+    EX x
+     P(x)
+   AND
+    EX x
+     NOT
+      P(x)
+    ALL x
+     NOT
+      P(x)
+  ALL x
+   OR
+    AND
+     Q(x)
+     P(x)
+    AND
+     NOT
+      Q(x)
+     NOT
+      P(x)
+ AND
+  AND
+   OR
+    EX x
+     NOT
+      P(x)
+    ALL x
+     NOT
+      P(x)
+   OR
+    ALL x
+     P(x)
+    EX x
+     P(x)
+  EX x
+   AND
+    OR
+     NOT
+      Q(x)
+     NOT
+      P(x)
+    OR
+     Q(x)
+     P(x)

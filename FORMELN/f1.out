@@ -1,0 +1,120 @@
+scanning EX
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning AND
+scanning predicate Q22
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable y2
+reducing variable to term y2
+scanning closing brackets
+reducing last term to term sequence (y2)
+reducing to term sequence (x,y2)
+reducing to atom Q22(x,y2)
+reducing to conjunction (P(x) AND Q22(x,y2))
+scanning closing brackets
+reducing to brackets (P(x) AND Q22(x,y2))
+reducing to existential formula (EX x (P(x) AND Q22(x,y2)))
+scanning OR
+scanning predicate Q
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom Q(x)
+scanning EQUIVALENCE
+reducing to disjunction ((EX x (P(x) AND Q22(x,y2))) OR Q(x))
+scanning NOT
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to negation (NOT P(x))
+scanning IMPLICATION
+scanning BOTTOM
+reducing to boolean constant BOTTOM
+reducing to implication ((NOT P(x)) IMPLIES BOTTOM)
+reducing to equivalence (((EX x (P(x) AND Q22(x,y2))) OR Q(x)) EQUIV ((NOT P(x)) IMPLIES BOTTOM))
+storing result.
+
+Original formula:
+EQUIV
+ OR
+  EX x
+   AND
+    P(x)
+    Q22(x,y2)
+  Q(x)
+ IMPLIES
+  NOT
+   P(x)
+  BOTTOM
+
+Without arrows:
+OR
+ AND
+  OR
+   EX x
+    AND
+     P(x)
+     Q22(x,y2)
+   Q(x)
+  OR
+   NOT
+    NOT
+     P(x)
+   BOTTOM
+ AND
+  NOT
+   OR
+    EX x
+     AND
+      P(x)
+      Q22(x,y2)
+    Q(x)
+  NOT
+   OR
+    NOT
+     NOT
+      P(x)
+    BOTTOM
+
+NNF:
+OR
+ AND
+  OR
+   EX x
+    AND
+     P(x)
+     Q22(x,y2)
+   Q(x)
+  OR
+   P(x)
+   BOTTOM
+ AND
+  AND
+   ALL x
+    OR
+     NOT
+      P(x)
+     NOT
+      Q22(x,y2)
+   NOT
+    Q(x)
+  AND
+   NOT
+    P(x)
+   TOP

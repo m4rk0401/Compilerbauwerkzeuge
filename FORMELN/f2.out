@@ -1,0 +1,112 @@
+scanning opening brackets
+scanning ALL
+scanning variable x
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to universal formula (ALL x P(x))
+scanning IMPLICATION
+scanning EX
+scanning variable x
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+reducing to existential formula (EX x P(x))
+scanning closing brackets
+reducing to implication ((ALL x P(x)) IMPLIES (EX x P(x)))
+reducing to brackets ((ALL x P(x)) IMPLIES (EX x P(x)))
+scanning AND
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning function c
+scanning closing brackets
+reducing constant to term c
+reducing last term to term sequence (c)
+reducing to atom P(c)
+scanning OR
+scanning predicate P
+scanning opening brackets
+scanning function f
+scanning opening brackets
+scanning function c
+scanning closing brackets
+reducing constant to term c
+reducing last term to term sequence (c)
+reducing function to term f(c)
+scanning closing brackets
+reducing last term to term sequence (f(c))
+reducing to atom P(f(c))
+scanning OR
+reducing to disjunction (P(c) OR P(f(c)))
+scanning predicate P
+scanning opening brackets
+scanning function f
+scanning opening brackets
+scanning function f
+scanning opening brackets
+scanning function c
+scanning closing brackets
+reducing constant to term c
+reducing last term to term sequence (c)
+reducing function to term f(c)
+scanning closing brackets
+reducing last term to term sequence (f(c))
+reducing function to term f(f(c))
+scanning closing brackets
+reducing last term to term sequence (f(f(c)))
+reducing to atom P(f(f(c)))
+scanning closing brackets
+reducing to disjunction ((P(c) OR P(f(c))) OR P(f(f(c))))
+reducing to brackets ((P(c) OR P(f(c))) OR P(f(f(c))))
+reducing to conjunction (((ALL x P(x)) IMPLIES (EX x P(x))) AND ((P(c) OR P(f(c))) OR P(f(f(c)))))
+storing result.
+
+Original formula:
+AND
+ IMPLIES
+  ALL x
+   P(x)
+  EX x
+   P(x)
+ OR
+  OR
+   P(c)
+   P(f(c))
+  P(f(f(c)))
+
+Without arrows:
+AND
+ OR
+  NOT
+   ALL x
+    P(x)
+  EX x
+   P(x)
+ OR
+  OR
+   P(c)
+   P(f(c))
+  P(f(f(c)))
+
+NNF:
+AND
+ OR
+  EX x
+   NOT
+    P(x)
+  EX x
+   P(x)
+ OR
+  OR
+   P(c)
+   P(f(c))
+  P(f(f(c)))

@@ -1,0 +1,83 @@
+scanning ALL
+scanning variable x
+scanning ALL
+scanning variable y
+scanning ALL
+scanning variable z
+scanning opening brackets
+scanning predicate R
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to term sequence (x,y)
+reducing to atom R(x,y)
+scanning AND
+scanning predicate R
+scanning opening brackets
+scanning variable y
+reducing variable to term y
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (y,z)
+reducing to atom R(y,z)
+reducing to conjunction (R(x,y) AND R(y,z))
+scanning IMPLICATION
+scanning predicate R
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (x,z)
+reducing to atom R(x,z)
+scanning closing brackets
+reducing to implication ((R(x,y) AND R(y,z)) IMPLIES R(x,z))
+reducing to brackets ((R(x,y) AND R(y,z)) IMPLIES R(x,z))
+reducing to universal formula (ALL z ((R(x,y) AND R(y,z)) IMPLIES R(x,z)))
+reducing to universal formula (ALL y (ALL z ((R(x,y) AND R(y,z)) IMPLIES R(x,z))))
+reducing to universal formula (ALL x (ALL y (ALL z ((R(x,y) AND R(y,z)) IMPLIES R(x,z)))))
+storing result.
+
+Original formula:
+ALL x
+ ALL y
+  ALL z
+   IMPLIES
+    AND
+     R(x,y)
+     R(y,z)
+    R(x,z)
+
+Without arrows:
+ALL x
+ ALL y
+  ALL z
+   OR
+    NOT
+     AND
+      R(x,y)
+      R(y,z)
+    R(x,z)
+
+NNF:
+ALL x
+ ALL y
+  ALL z
+   OR
+    OR
+     NOT
+      R(x,y)
+     NOT
+      R(y,z)
+    R(x,z)
