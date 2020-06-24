@@ -193,7 +193,9 @@ int main (int argc, char* argv[])
   renameRule(formula_input);
   originalPrint(formula_input, 0);
   printf("\n");
-
+  
+  nameCounter = 1;
+  
   printf("Skolemization:\n");
   skolemizationRule(formula_input);
   originalPrint(formula_input, 0);
