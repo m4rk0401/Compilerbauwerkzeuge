@@ -1,0 +1,242 @@
+scanning ALL
+scanning variable w1
+scanning EX
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning AND
+scanning EX
+scanning variable y
+scanning ALL
+scanning variable w2
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to atom P(y)
+scanning AND
+scanning NOT
+scanning predicate P
+scanning opening brackets
+scanning variable w2
+reducing variable to term w2
+scanning closing brackets
+reducing last term to term sequence (w2)
+reducing to atom P(w2)
+reducing to negation (NOT P(w2))
+reducing to conjunction (AND P(y) (NOT P(w2)))
+scanning AND
+scanning predicate R
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to term sequence (x,y)
+reducing to atom R(x,y)
+reducing to conjunction (AND (AND P(y) (NOT P(w2))) R(x,y))
+scanning closing brackets
+reducing to brackets (AND (AND P(y) (NOT P(w2))) R(x,y))
+reducing to universal formula (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y)))
+reducing to existential formula (EX y (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y))))
+reducing to conjunction (AND P(x) (EX y (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y)))))
+scanning AND
+scanning ALL
+scanning variable w3
+scanning EX
+scanning variable z
+scanning opening brackets
+scanning NOT
+scanning predicate P
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to atom P(z)
+reducing to negation (NOT P(z))
+scanning AND
+scanning predicate P
+scanning opening brackets
+scanning variable w3
+reducing variable to term w3
+scanning closing brackets
+reducing last term to term sequence (w3)
+reducing to atom P(w3)
+reducing to conjunction (AND (NOT P(z)) P(w3))
+scanning AND
+scanning predicate R
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (x,z)
+reducing to atom R(x,z)
+reducing to conjunction (AND (AND (NOT P(z)) P(w3)) R(x,z))
+scanning closing brackets
+reducing to brackets (AND (AND (NOT P(z)) P(w3)) R(x,z))
+reducing to existential formula (EX z (AND (AND (NOT P(z)) P(w3)) R(x,z)))
+reducing to universal formula (ALL w3 (EX z (AND (AND (NOT P(z)) P(w3)) R(x,z))))
+reducing to conjunction (AND (AND P(x) (EX y (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y))))) (ALL w3 (EX z (AND (AND (NOT P(z)) P(w3)) R(x,z)))))
+scanning closing brackets
+reducing to brackets (AND (AND P(x) (EX y (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y))))) (ALL w3 (EX z (AND (AND (NOT P(z)) P(w3)) R(x,z)))))
+reducing to existential formula (EX x (AND (AND P(x) (EX y (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y))))) (ALL w3 (EX z (AND (AND (NOT P(z)) P(w3)) R(x,z))))))
+reducing to universal formula (ALL w1 (EX x (AND (AND P(x) (EX y (ALL w2 (AND (AND P(y) (NOT P(w2))) R(x,y))))) (ALL w3 (EX z (AND (AND (NOT P(z)) P(w3)) R(x,z)))))))
+storing result.
+
+Original formula:
+ALL w1
+ EX x
+  AND
+   AND
+    P(x)
+    EX y
+     ALL w2
+      AND
+       AND
+        P(y)
+        NOT
+         P(w2)
+       R(x,y)
+   ALL w3
+    EX z
+     AND
+      AND
+       NOT
+        P(z)
+       P(w3)
+      R(x,z)
+
+Without arrows:
+ALL w1
+ EX x
+  AND
+   AND
+    P(x)
+    EX y
+     ALL w2
+      AND
+       AND
+        P(y)
+        NOT
+         P(w2)
+       R(x,y)
+   ALL w3
+    EX z
+     AND
+      AND
+       NOT
+        P(z)
+       P(w3)
+      R(x,z)
+
+NNF:
+ALL w1
+ EX x
+  AND
+   AND
+    P(x)
+    EX y
+     ALL w2
+      AND
+       AND
+        P(y)
+        NOT
+         P(w2)
+       R(x,y)
+   ALL w3
+    EX z
+     AND
+      AND
+       NOT
+        P(z)
+       P(w3)
+      R(x,z)
+
+Renamed Variables:
+ALL v1
+ EX v2
+  AND
+   AND
+    P(v2)
+    EX v3
+     ALL v4
+      AND
+       AND
+        P(v3)
+        NOT
+         P(v4)
+       R(v2,v3)
+   ALL v5
+    EX v6
+     AND
+      AND
+       NOT
+        P(v6)
+       P(v5)
+      R(v2,v6)
+
+Skolemised:
+ALL v1
+ AND
+  AND
+   P(f1(v1))
+   ALL v4
+    AND
+     AND
+      P(f2(v1))
+      NOT
+       P(v4)
+     R(f1(v1),f2(v1))
+  ALL v5
+   AND
+    AND
+     NOT
+      P(f3(v5,v1))
+     P(v5)
+    R(f1(v1),f3(v5,v1))
+
+Universal quantifiers removed:
+AND
+ AND
+  P(f1(v1))
+  AND
+   AND
+    P(f2(v1))
+    NOT
+     P(v4)
+   R(f1(v1),f2(v1))
+ AND
+  AND
+   NOT
+    P(f3(v5,v1))
+   P(v5)
+  R(f1(v1),f3(v5,v1))
+
+KNF:
+AND
+ R(f1(v1),f2(v1))
+ P(f2(v1))
+ NOT
+  P(v4)
+ P(f1(v1))
+ P(v5)
+ NOT
+  P(f3(v5,v1))
+ R(f1(v1),f3(v5,v1))

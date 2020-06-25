@@ -1,0 +1,1 @@
+ex x (P(x) & ex y (P(y) & R(x,y)) & ex z (~ P(z) & R (x,z)))

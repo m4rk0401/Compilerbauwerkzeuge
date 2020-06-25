@@ -1,0 +1,1 @@
+(all x P(x) -> ex x P(x)) & (P(c) | P(f(c)) | P(f(f(c))))
