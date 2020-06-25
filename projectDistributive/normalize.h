@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <unistd.h>
 
 /* forward declaration */
 formula * nnf(formula * formulaElement);
@@ -479,16 +480,12 @@ void  distributiveRule(formula * formulaElement)
     if(formulaElement -> typS == type_or)
     {
         /* check left formula */
-        if(formulaElement -> subL -> typS == type_and &&
-            (formulaElement -> subR -> typS != type_and &&
-            formulaElement -> subR -> typS != type_or))
+        if(formulaElement -> subL -> typS == type_and && formulaElement -> subR != NULL)
         {
             rebuildLeftOr(formulaElement);
         }
         /* check right formula */
-        else if(formulaElement -> subR -> typS == type_and &&
-                (formulaElement -> subL -> typS != type_and &&
-                formulaElement -> subL -> typS != type_or))
+        else if(formulaElement -> subR -> typS == type_and && formulaElement -> subL != NULL)
         {
             rebuildRightOr(formulaElement);
         }
@@ -497,16 +494,12 @@ void  distributiveRule(formula * formulaElement)
     else if(formulaElement -> typS == type_and)
     {
         /* check left formula */
-        if(formulaElement -> subL -> typS == type_or &&
-            (formulaElement -> subR -> typS != type_and &&
-            formulaElement -> subR -> typS != type_or))
+        if(formulaElement -> subL -> typS == type_or)
         {
             rebuildLeftAnd(formulaElement);
         }
         /* check right formula */
-        else if(formulaElement -> subR -> typS == type_or &&
-                (formulaElement -> subL -> typS != type_and &&
-                formulaElement -> subL -> typS != type_or))
+        else if(formulaElement -> subR -> typS == type_or)
         {
             rebuildRightOr(formulaElement);
         }
@@ -544,7 +537,7 @@ void rebuildRightOr(formula * formulaElement)
 
     /* create new formula */
     formulaElement -> typS = type_and;
-    formulaElement -> subL = createFormula(type_or, NULL, NULL, subL_copy, subL_copy -> subL);
+    formulaElement -> subL = createFormula(type_or, NULL, NULL, subL_copy, subR_copy -> subL);
     formulaElement -> subR = createFormula(type_or, NULL, NULL, subL_copy, subR_copy -> subR);
 }
 
@@ -570,7 +563,7 @@ void rebuildRightAnd(formula * formulaElement)
 
     /* create new formula */
     formulaElement -> typS = type_or;
-    formulaElement -> subL = createFormula(type_and, NULL, NULL, subL_copy, subL_copy -> subL);
+    formulaElement -> subL = createFormula(type_and, NULL, NULL, subL_copy, subR_copy -> subL);
     formulaElement -> subR = createFormula(type_and, NULL, NULL, subL_copy, subR_copy -> subR);
 }
 

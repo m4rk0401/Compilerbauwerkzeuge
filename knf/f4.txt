@@ -1,1 +1,3 @@
-all x all y ex z P(x,y,z)
+(A AND B) OR (C AND D)
+
+
