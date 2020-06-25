@@ -207,5 +207,12 @@ int main (int argc, char* argv[])
   skolemizationRule(formula_input);
   originalPrint(formula_input, 0);
   printf("\n");
+
+  printf("Remove quantifiers:\n");
+  removeQuantifiers(formula_input);
+  originalPrint(formula_input, 0);
+  printf("\n");
+
+
 }
 
