@@ -67,7 +67,9 @@
     #include <stdio.h>
     #include <string.h>
     #include "dataTypes.h"
-	#include "print.h"
+    #include "copy.h"
+    #include "print.h"
+    #include "normalize.h"
 
     // Declare stuff from Flex that Bison needs to know about:
     extern FILE *yyin;
@@ -78,7 +80,7 @@
     /* create formula */
     formula * formula_input;
 
-#line 82 "pTest.tab.c" /* yacc.c:339  */
+#line 84 "pTest.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -137,14 +139,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 17 "pTest.y" /* yacc.c:355  */
+#line 19 "pTest.y" /* yacc.c:355  */
 
   char *val;
   struct term * term;
   struct termList * termList;
   struct formula * formula;
 
-#line 148 "pTest.tab.c" /* yacc.c:355  */
+#line 150 "pTest.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -161,7 +163,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 165 "pTest.tab.c" /* yacc.c:358  */
+#line 167 "pTest.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -460,8 +462,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    43,    43,    48,    54,    60,    69,    75,    83,    89,
-      95,    99,   103,   109,   115,   121,   127,   133,   139,   145
+       0,    45,    45,    50,    56,    62,    71,    77,    85,    91,
+      97,   101,   105,   111,   117,   123,   129,   135,   141,   147
 };
 #endif
 
@@ -1249,198 +1251,198 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 43 "pTest.y" /* yacc.c:1646  */
+#line 45 "pTest.y" /* yacc.c:1646  */
     {
       formula_input = (yyvsp[0].formula);
 }
-#line 1257 "pTest.tab.c" /* yacc.c:1646  */
+#line 1259 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 48 "pTest.y" /* yacc.c:1646  */
+#line 50 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.term) = createTerm((yyvsp[0].val), NULL);
         printf("reducing variable to term ");
         printTerm((yyval.term));
         printf("\n");
       }
-#line 1268 "pTest.tab.c" /* yacc.c:1646  */
+#line 1270 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 54 "pTest.y" /* yacc.c:1646  */
+#line 56 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.term) = createTerm((yyvsp[0].val), NULL);
         printf("reducing to term ");
         printTerm((yyval.term));
         printf("\n");
       }
-#line 1279 "pTest.tab.c" /* yacc.c:1646  */
+#line 1281 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 60 "pTest.y" /* yacc.c:1646  */
+#line 62 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.term) = createTerm((yyvsp[-3].val), (yyvsp[-1].termList));
         printf("reducing to term ");
         printTerm((yyval.term));
         printf("\n");
       }
-#line 1290 "pTest.tab.c" /* yacc.c:1646  */
+#line 1292 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 69 "pTest.y" /* yacc.c:1646  */
+#line 71 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.termList) = createTermList((yyvsp[0].term), NULL);
         printf("reducing last term to term sequence ");
         printTermList((yyval.termList));
         printf("\n");
       }
-#line 1301 "pTest.tab.c" /* yacc.c:1646  */
+#line 1303 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 75 "pTest.y" /* yacc.c:1646  */
+#line 77 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.termList) = createTermList((yyvsp[-2].term), (yyvsp[0].termList));
         printf("reducing to term sequence ");
         printTermList((yyval.termList));
         printf("\n");
       }
-#line 1312 "pTest.tab.c" /* yacc.c:1646  */
+#line 1314 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 83 "pTest.y" /* yacc.c:1646  */
+#line 85 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_atom, (yyvsp[0].val), NULL, NULL, NULL);
         printf("reducing to atom ");
         printFormula((yyval.formula));
         printf("\n");
         }
-#line 1323 "pTest.tab.c" /* yacc.c:1646  */
+#line 1325 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 89 "pTest.y" /* yacc.c:1646  */
+#line 91 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_atom, (yyvsp[-3].val), (yyvsp[-1].termList), NULL, NULL);
         printf("reducing to atom ");
         printFormula((yyval.formula));
         printf("\n");
         }
-#line 1334 "pTest.tab.c" /* yacc.c:1646  */
+#line 1336 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 95 "pTest.y" /* yacc.c:1646  */
+#line 97 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_top, NULL, NULL, NULL, NULL);
         printf("reducing to boolean constant TOP\n");
         }
-#line 1343 "pTest.tab.c" /* yacc.c:1646  */
+#line 1345 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 99 "pTest.y" /* yacc.c:1646  */
+#line 101 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_bottom, NULL, NULL, NULL, NULL);
         printf("reducing to boolean constant BOTTOM\n");
         }
-#line 1352 "pTest.tab.c" /* yacc.c:1646  */
+#line 1354 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 103 "pTest.y" /* yacc.c:1646  */
+#line 105 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_all, (yyvsp[-1].val), NULL, (yyvsp[0].formula), NULL);
         printf("reducing to all formula ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1363 "pTest.tab.c" /* yacc.c:1646  */
+#line 1365 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 109 "pTest.y" /* yacc.c:1646  */
+#line 111 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_ex, (yyvsp[-1].val), NULL, (yyvsp[0].formula), NULL);
         printf("reducing to existential formula ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1374 "pTest.tab.c" /* yacc.c:1646  */
+#line 1376 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 115 "pTest.y" /* yacc.c:1646  */
+#line 117 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_and, NULL, NULL, (yyvsp[-2].formula), (yyvsp[0].formula));
         printf("reducing to conjunction ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1385 "pTest.tab.c" /* yacc.c:1646  */
+#line 1387 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 121 "pTest.y" /* yacc.c:1646  */
+#line 123 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_or, NULL, NULL, (yyvsp[-2].formula), (yyvsp[0].formula));
         printf("reducing to disjunction ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1396 "pTest.tab.c" /* yacc.c:1646  */
+#line 1398 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 127 "pTest.y" /* yacc.c:1646  */
+#line 129 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_implication, NULL, NULL, (yyvsp[-2].formula), (yyvsp[0].formula));
         printf("reducing to implication ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1407 "pTest.tab.c" /* yacc.c:1646  */
+#line 1409 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 133 "pTest.y" /* yacc.c:1646  */
+#line 135 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_equivalence, NULL, NULL, (yyvsp[-2].formula), (yyvsp[0].formula));
         printf("reducing to equivalence ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1418 "pTest.tab.c" /* yacc.c:1646  */
+#line 1420 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 139 "pTest.y" /* yacc.c:1646  */
+#line 141 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = createFormula(type_not, NULL, NULL, (yyvsp[0].formula), NULL);
         printf("reducing to negation ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1429 "pTest.tab.c" /* yacc.c:1646  */
+#line 1431 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 145 "pTest.y" /* yacc.c:1646  */
+#line 147 "pTest.y" /* yacc.c:1646  */
     {
         (yyval.formula) = (yyvsp[-1].formula);
         printf("reducing to brackets ");
         printFormula((yyval.formula));
         printf("\n");
       }
-#line 1440 "pTest.tab.c" /* yacc.c:1646  */
+#line 1442 "pTest.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1444 "pTest.tab.c" /* yacc.c:1646  */
+#line 1446 "pTest.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1668,7 +1670,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 151 "pTest.y" /* yacc.c:1906  */
+#line 153 "pTest.y" /* yacc.c:1906  */
 
 
 int yyerror(char* err)
@@ -1687,8 +1689,24 @@ int main (int argc, char* argv[])
      yyin = stdin;
     
   yyparse();
- }
+
+  formula * formula_withoutArrows = copyFormula(formula_input);
+  formula * formula_nnf =           copyFormula(formula_input);
+
+  printf("storing results.\n\n");
+
+  printf("Original formula:\n");
+  originalPrint(formula_input, 0);
+  printf("\n");
+
+  printf("Without arrows:\n");
+  eleminationOfArrows(formula_withoutArrows);
+  originalPrint(formula_withoutArrows, 0);
+  printf("\n");
 
 
-
+  printf("NNF:\n");
+  nnf(formula_input);
+  originalPrint(formula_input, 0);
+}
 

@@ -2,9 +2,7 @@
     #include <stdio.h>
     #include <string.h>
     #include "dataTypes.h"
-    #include "copy.h"
-    #include "print.h"
-    #include "normalize.h"
+	#include "print.h"
 
     // Declare stuff from Flex that Bison needs to know about:
     extern FILE *yyin;
@@ -168,24 +166,8 @@ int main (int argc, char* argv[])
      yyin = stdin;
     
   yyparse();
-
-  formula * formula_withoutArrows = copyFormula(formula_input);
-  formula * formula_nnf =           copyFormula(formula_input);
-
-  printf("storing results.\n\n");
-
-  printf("Original formula:\n");
-  originalPrint(formula_input, 0);
-  printf("\n");
-
-  printf("Without arrows:\n");
-  eleminationOfArrows(formula_withoutArrows);
-  originalPrint(formula_withoutArrows, 0);
-  printf("\n");
+ }
 
 
-  printf("NNF:\n");
-  nnf(formula_input);
-  originalPrint(formula_input, 0);
-}
+
 

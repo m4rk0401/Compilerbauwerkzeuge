@@ -69,7 +69,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 17 "pTest.y" /* yacc.c:1909  */
+#line 19 "pTest.y" /* yacc.c:1909  */
 
   char *val;
   struct term * term;
