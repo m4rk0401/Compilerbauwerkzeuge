@@ -1,0 +1,1 @@
+all x (P(x) & Q(x)) | all x (P(x) | Q(y))

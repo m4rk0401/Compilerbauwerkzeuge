@@ -1,0 +1,1 @@
+(all x (P(x)) <-> ex x P(x)) <-> all x (Q(x) <-> P(x))

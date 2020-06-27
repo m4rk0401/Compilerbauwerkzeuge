@@ -1,0 +1,1 @@
+all w1 ex x (P(x) & ex y all w2 (P(y) & ~P(w2) & R(x,y)) & all w3 ex z (~ P(z) & P(w3) & R (x,z)))

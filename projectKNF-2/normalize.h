@@ -61,8 +61,12 @@ void eleminationOfArrows(formula * formulaElement)
     /* check for implication */
     if(formulaElement -> typS == type_implication)
     {
+        formula * subL_copy = copyFormula(formulaElement -> subL);
+        formula * subR_copy = copyFormula(formulaElement -> subR);
+
         formulaElement -> typS = type_or;
-        formulaElement -> subL = createFormula(type_not, NULL, NULL, formulaElement -> subL, NULL);
+        formulaElement -> subL = subR_copy;
+        formulaElement -> subR = createFormula(type_not, NULL, NULL, subL_copy, NULL);
     }
     else if(formulaElement -> typS == type_equivalence)
     {
@@ -75,9 +79,9 @@ void eleminationOfArrows(formula * formulaElement)
         formula * subR_not = createFormula(type_not, NULL, NULL, subR_copy, NULL);
 
         /* combine new formulas */
-        formulaElement -> typS = type_or;
-        formulaElement -> subL = createFormula(type_and, NULL, NULL, formulaElement -> subL, formulaElement -> subR);
-        formulaElement -> subR = createFormula(type_and, NULL, NULL, subL_not, subR_not);
+        formulaElement -> typS = type_and;
+        formulaElement -> subL = createFormula(type_or, NULL, NULL, subL_copy, subR_not);
+        formulaElement -> subR = createFormula(type_or, NULL, NULL, subR_copy, subL_not);
     }
 }
 

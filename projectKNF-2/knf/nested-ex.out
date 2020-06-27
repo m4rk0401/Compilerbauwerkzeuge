@@ -1,0 +1,165 @@
+scanning EX
+scanning variable x
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning closing brackets
+reducing last term to term sequence (x)
+reducing to atom P(x)
+scanning AND
+scanning EX
+scanning variable y
+scanning opening brackets
+scanning predicate P
+scanning opening brackets
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to atom P(y)
+scanning AND
+scanning predicate R
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable y
+reducing variable to term y
+scanning closing brackets
+reducing last term to term sequence (y)
+reducing to term sequence (x,y)
+reducing to atom R(x,y)
+reducing to conjunction (AND P(y) R(x,y))
+scanning closing brackets
+reducing to brackets (AND P(y) R(x,y))
+reducing to existential formula (EX y (AND P(y) R(x,y)))
+reducing to conjunction (AND P(x) (EX y (AND P(y) R(x,y))))
+scanning AND
+scanning EX
+scanning variable z
+scanning opening brackets
+scanning NOT
+scanning predicate P
+scanning opening brackets
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to atom P(z)
+reducing to negation (NOT P(z))
+scanning AND
+scanning predicate R
+scanning opening brackets
+scanning variable x
+reducing variable to term x
+scanning comma
+scanning variable z
+reducing variable to term z
+scanning closing brackets
+reducing last term to term sequence (z)
+reducing to term sequence (x,z)
+reducing to atom R(x,z)
+reducing to conjunction (AND (NOT P(z)) R(x,z))
+scanning closing brackets
+reducing to brackets (AND (NOT P(z)) R(x,z))
+reducing to existential formula (EX z (AND (NOT P(z)) R(x,z)))
+reducing to conjunction (AND (AND P(x) (EX y (AND P(y) R(x,y)))) (EX z (AND (NOT P(z)) R(x,z))))
+scanning closing brackets
+reducing to brackets (AND (AND P(x) (EX y (AND P(y) R(x,y)))) (EX z (AND (NOT P(z)) R(x,z))))
+reducing to existential formula (EX x (AND (AND P(x) (EX y (AND P(y) R(x,y)))) (EX z (AND (NOT P(z)) R(x,z)))))
+storing result.
+
+Original formula:
+EX x
+ AND
+  AND
+   P(x)
+   EX y
+    AND
+     P(y)
+     R(x,y)
+  EX z
+   AND
+    NOT
+     P(z)
+    R(x,z)
+
+Without arrows:
+EX x
+ AND
+  AND
+   P(x)
+   EX y
+    AND
+     P(y)
+     R(x,y)
+  EX z
+   AND
+    NOT
+     P(z)
+    R(x,z)
+
+NNF:
+EX x
+ AND
+  AND
+   P(x)
+   EX y
+    AND
+     P(y)
+     R(x,y)
+  EX z
+   AND
+    NOT
+     P(z)
+    R(x,z)
+
+Renamed Variables:
+EX v1
+ AND
+  AND
+   P(v1)
+   EX v2
+    AND
+     P(v2)
+     R(v1,v2)
+  EX v3
+   AND
+    NOT
+     P(v3)
+    R(v1,v3)
+
+Skolemised:
+AND
+ AND
+  P(f1)
+  AND
+   P(f2)
+   R(f1,f2)
+ AND
+  NOT
+   P(f3)
+  R(f1,f3)
+
+Universal quantifiers removed:
+AND
+ AND
+  P(f1)
+  AND
+   P(f2)
+   R(f1,f2)
+ AND
+  NOT
+   P(f3)
+  R(f1,f3)
+
+KNF:
+AND
+ R(f1,f2)
+ P(f2)
+ P(f1)
+ NOT
+  P(f3)
+ R(f1,f3)

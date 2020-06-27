@@ -1,0 +1,1 @@
+Modifizieren Sie Ihren Parser so, dass er nicht nur die Syntax testet,sondern auch die Formel in der Eingabe-Datei in die von Ihnen definiertenDatenstruktur einliest.Ergebnis sollte eine globale Variable (z.B.formula* f)sein, die dieFormel der Eingabedatei enth ̈alt.
