@@ -6,7 +6,8 @@ void printTermList(termList * termListElement);
 void printFormula(formula * formulaElement);
 const char * createSpaces(int spaces);
 void originalPrint(formula * formulaElement, int spaces);
-void printknfFormula(knfformula * formulaElement);
+void printKnfFormula(knfFormula * formulaElement);
+void originalKnfPrint(knfFormula * formulaElement, int spaces);
 
 /* print term */
 void printTerm(term * termElement)
@@ -113,56 +114,96 @@ void printFormula(formula * formulaElement)
 }
 
 /* print formula depending on type */
-void printknfFormula(knfformula * formulaElement)
+void printKnfFormula(knfFormula * formulaElement)
 {
-	if(formulaElement != NULL){
-		switch(formulaElement -> typS)
-		{
-			case type_atom:
-			  printf("%s", formulaElement -> varfunc);
-			  if (formulaElement -> list != NULL)
-			  {
-				printf("(");
-				printTermList(formulaElement -> list);
-				printf(")");
-			  }
-			  break;
-			case type_and:
-			case type_or:
-			  switch(formulaElement -> typS)
-			  {
-				case type_and:
-					printf(" AND ");
-					break;
-				case type_or:
-					printf(" OR ");
-					break;
-			  }
-			  printf(")");
-			  break;
-			case type_not:
-			  printf("(");
-			  printf("NOT ");
-			  printf(")");
-			  break;
-			case type_top:
-			case type_bottom:
-			  switch(formulaElement -> typS)
-			  {
-				case type_top:
-					printf("TOP");
-					break;
-				case type_bottom:
-					printf("BOTTOM");
-					break;
-			  }
+    switch(formulaElement -> typS)
+    {
+        case type_atom:
+            printf("%s", formulaElement -> varfunc);
+            if (formulaElement -> list != NULL)
+            {
+                printf("(");
+                printTermList(formulaElement -> list);
+                printf(")");
+            }
+            break;
 
-			  break;
-		}
-	}
-	
-	printf("\n");
-	printknfFormula(formulaElement -> next);
+        case type_and:
+        case type_or:
+            printf("(");
+            printKnfFormula(formulaElement -> subL);
+
+            switch(formulaElement -> typS)
+            {
+                case type_and:
+                    printf(" AND ");
+                    break;
+                case type_or:
+                    printf(" OR ");
+                    break;
+            }
+
+            printKnfFormula(formulaElement -> subR);
+
+            if(formulaElement -> next != NULL)
+            {
+                switch(formulaElement -> typS)
+                {
+                    case type_and:
+                        printf(" AND ");
+                        break;
+                    case type_or:
+                        printf(" OR ");
+                        break;
+                }
+
+                printKnfFormula(formulaElement -> next);
+            }
+
+            printf(")");
+            break;
+
+        case type_not:
+            printf("(");
+            printf("NOT ");
+            printKnfFormula(formulaElement -> subL);
+            printf(")");
+            break;
+
+        case type_all:
+        case type_ex:
+            printf("(");
+      
+            switch(formulaElement -> typS)
+            {
+                case type_all:
+                    printf("ALL");
+                    break;
+
+                case type_ex:
+                    printf("EX");
+                    break;
+            }
+
+            printf(" %s ", formulaElement -> varfunc);
+            printKnfFormula(formulaElement -> subL);
+            printf(")");
+            break;
+
+        case type_top:
+        case type_bottom:
+            switch(formulaElement -> typS)
+            {
+                case type_top:
+                    printf("TOP");
+                    break;
+                case type_bottom:
+                    printf("BOTTOM");
+                    break;
+              }     
+
+        break;
+    }
 }
 
 
@@ -245,6 +286,87 @@ void originalPrint(formula * formulaElement, int spaces)
 
       printf("%s%s %s\n", createSpaces(spaces), typeChar, formulaElement -> varfunc);
       originalPrint(formulaElement -> subL, spaces+1);
+      break;
+
+    case type_top:
+    case type_bottom:
+      switch(formulaElement -> typS)
+      {
+        case type_top:
+            typeChar = "TOP";
+            break;
+        case type_bottom:
+            typeChar = "BOTTOM";
+            break;
+      }
+
+      printf("%s%s\n", createSpaces(spaces), typeChar);
+      break;
+  }
+}
+
+/* function to print knf formula */
+void originalKnfPrint(knfFormula * formulaElement, int spaces)
+{
+  if(formulaElement == NULL)
+  {
+    return;
+  }
+
+  char * typeChar = "";
+  switch(formulaElement -> typS)
+  {
+    case type_atom:
+      printf("%s%s", createSpaces(spaces), formulaElement -> varfunc);
+      if (formulaElement -> list != NULL)
+      {
+        printf("(");
+        printTermList(formulaElement -> list);
+        printf(")\n");
+      }
+      break;
+
+    case type_and:
+    case type_or:
+    case type_implication:
+    case type_equivalence:
+      switch(formulaElement -> typS)
+      {
+        case type_and:
+            typeChar = "AND";
+            break;
+        case type_or:
+            typeChar = "OR";
+            break;
+        case type_implication:
+            typeChar = "IMPLIES";
+            break;
+        case type_equivalence:
+            typeChar = "EQUIV";
+            break;
+      }
+
+      printf("%s%s\n", createSpaces(spaces), typeChar);
+      originalKnfPrint(formulaElement -> subL, spaces+1);
+      originalKnfPrint(formulaElement -> subR, spaces+1);
+
+      knfFormula * tmpFormula = (knfFormula*) malloc(sizeof(knfFormula));
+      if(formulaElement -> next != NULL)
+      {
+          tmpFormula = formulaElement -> next;
+          while(tmpFormula != NULL)
+          {
+              originalKnfPrint(tmpFormula -> subL, spaces+1);
+              originalKnfPrint(tmpFormula -> subR, spaces+1);
+
+              tmpFormula = tmpFormula -> next;
+          }
+      }
+      break;
+    
+    case type_not:
+      printf("%s%s\n", createSpaces(spaces), "NOT");
+      originalKnfPrint(formulaElement -> subL, spaces+1);
       break;
 
     case type_top:

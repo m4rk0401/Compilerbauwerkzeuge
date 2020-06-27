@@ -171,7 +171,7 @@ int main (int argc, char* argv[])
 
   formula * formula_withoutArrows = copyFormula(formula_input);
   formula * formula_nnf =           copyFormula(formula_input);
-  formula * formula_empty;
+  knfFormula * startKnfFormula = (knfFormula*) malloc(sizeof(knfFormula));
 
   printf("storing results.\n\n");
 
@@ -207,9 +207,20 @@ int main (int argc, char* argv[])
   skolemizationRule(formula_input);
   originalPrint(formula_input, 0);
   printf("\n");
+
+  printf("Remove quantifiers:\n");
+  removeQuantifiers(formula_input);
+  originalPrint(formula_input, 0);
+  printf("\n");
+
+  printf("Distributiv:\n");
+  distributiveRule(formula_input);
+  originalPrint(formula_input, 0);
+  printf("\n");
   
   printf("To KNF:\n");
-  converttoknfformula(formula_input, startknfformula);
-  
+  startKnfFormula = convertToKnfFormula(formula_input);
+  originalKnfPrint(startKnfFormula, 0);
+  printf("\n");
 }
 

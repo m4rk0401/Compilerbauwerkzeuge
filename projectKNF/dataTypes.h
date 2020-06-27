@@ -3,7 +3,7 @@
 typedef struct term term;
 typedef struct termList termList;
 typedef struct formula formula;
-typedef struct knfformula knfformula;
+typedef struct knfFormula knfFormula;
 
 enum typ
 {
@@ -40,18 +40,21 @@ struct formula
     formula * subR;
 };
 
-struct knfformula
+struct knfFormula
 {
 	enum typ typS;
     char * varfunc;
     termList * list;
-    knfformula * next;	
+    knfFormula * subL;
+    knfFormula * subR;
+    knfFormula * next;	
 };
 
 /* forward declaration */
 term * createTerm(char * varfunc, termList * tL);
 termList * createTermList(term * termElement, termList * termListElement);
 formula * createFormula(enum typ typs, char * varName, termList * listElement, formula * subLElement, formula * subRElement);
+knfFormula * createKnfFormula(enum typ pTypS, char * pvarfunc, termList * listElement, knfFormula * subL, knfFormula * subR, knfFormula * next);
 
 /* create term */
 term * createTerm(char * varfunc, termList * tL)
@@ -105,19 +108,21 @@ formula * createFormula(enum typ pTypS, char * pvarfunc, termList * listElement,
 }
 
 /* create knf formula */
-knfformula * createknfFormula(enum typ pTypS, char * pvarfunc, termList * listElement, knfformula * next)
+knfFormula * createKnfFormula(enum typ pTypS, char * pvarfunc, termList * listElement, knfFormula * pSubL, knfFormula * pSubR, knfFormula * pNext)
 {
-    knfformula * knfformula_new = (knfformula*) malloc(sizeof(knfformula));
+    knfFormula * knfFormula_new = (knfFormula*) malloc(sizeof(knfFormula));
 
-    if(knfformula_new == NULL)
+    if(knfFormula_new == NULL)
     {
         return NULL;
     }
 
-    knfformula_new -> typS = pTypS;
-    knfformula_new -> varfunc = pvarfunc;
-    knfformula_new -> list = listElement;
-    knfformula_new -> next = next;
+    knfFormula_new -> typS = pTypS;
+    knfFormula_new -> varfunc = pvarfunc;
+    knfFormula_new -> list = listElement;
+    knfFormula_new -> subL = pSubL;
+    knfFormula_new -> subR = pSubR;
+    knfFormula_new -> next = pNext;
 
-    return knfformula_new;
+    return knfFormula_new;
 }

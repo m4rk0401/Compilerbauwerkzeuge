@@ -9,8 +9,6 @@ char * selectedVarFunc;
 int indexAllVar = 0;
 char * allVar[255];
 int excounter = 0;
-knfformula * startknfformula;
-knfformula * endknfformula;
 bool firstknf = false;
 
 /* forward declaration */
@@ -27,7 +25,13 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc);
 void renameTermSkolem(term * termElement, char * selectedVarFunc);
 void renameTermListSkolem(termList * termListElement, char * selectedVarFunc);
 void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc);
-void converttoknfformula(formula * formulaElement, knfformula * headElement);
+void removeQuantifiers(formula * formulaElement);
+void distributiveRule(formula * formulaElement);
+void rebuildLeftOr(formula * formulaElement);
+void rebuildRightOr(formula * formulaElement);
+void rebuildLeftAnd(formula * formulaElement);
+void rebuildRightAnd(formula * formulaElement);
+knfFormula * convertToKnfFormula(formula * formulaElement);
 /*void flatten(formula * formulaElement);
 void createknfFormulaLeftAnd(formula * formulaElement);
 void createknfFormulaLeftOr(formula * formulaElement);
@@ -445,34 +449,149 @@ void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc)
     }
 }
 
-
-
-void converttoknfformula(formula * formulaElement, knfformula * headElement)
+/* function to remove all quantifiers */
+void removeQuantifiers(formula * formulaElement)
 {
-	if(firstknf == false)
-	{
-		firstknf = true;
-		headElement = createknfFormula(formulaElement -> typS, formulaElement -> varfunc, formulaElement -> list, NULL);
+	/* check for subformula left and right */
+    if(formulaElement -> subL != NULL)
+    {
+        removeQuantifiers(formulaElement -> subL);
+    }
+    if(formulaElement -> subR != NULL)
+    {
+        removeQuantifiers(formulaElement -> subR);
+    }
+
+    /* check for all and ex */
+    if(formulaElement -> typS == type_all || formulaElement -> typS == type_ex)
+    {
+        formula * mainSubFormula = copyFormula(formulaElement -> subL);
+        formulaElement -> typS = mainSubFormula -> typS;
+        formulaElement -> varfunc = mainSubFormula -> varfunc;
+        formulaElement -> list = mainSubFormula -> list;
+        formulaElement -> subL = mainSubFormula -> subL;
+        formulaElement -> subR = mainSubFormula -> subR;
 	}
-	
-	printf("Test1\n");
-	
-	knfformula * temp1 = createknfFormula(formulaElement -> subL -> typS, formulaElement -> subL -> varfunc, formulaElement -> subL -> list, headElement);
-	knfformula * temp2 = createknfFormula(formulaElement -> subR -> typS, formulaElement -> subR -> varfunc, formulaElement -> subR -> list, headElement);
-	
-	if(formulaElement -> subL != NULL)
-	{
-		converttoknfformula(formulaElement -> subL, temp1);
-	}	
-	
-	if(formulaElement -> subR != NULL)
-	{
-		converttoknfformula(formulaElement -> subR, temp2);
-	}
-	else
-	{
-		endknfformula = headElement;
-	}
+}
+
+/* function for distributiv rule */
+void  distributiveRule(formula * formulaElement)
+{
+    /* check for or in typS */
+    if(formulaElement -> typS == type_or)
+    {
+        /* check left formula */
+        if(formulaElement -> subL -> typS == type_and && formulaElement -> subR != NULL)
+        {
+            rebuildLeftOr(formulaElement);
+        }
+        /* check right formula */
+        else if(formulaElement -> subR -> typS == type_and && formulaElement -> subL != NULL)
+        {
+            rebuildRightOr(formulaElement);
+        }
+    }
+    /* check fir and in typS */
+    else if(formulaElement -> typS == type_and)
+    {
+        /* check left formula */
+        if(formulaElement -> subL -> typS == type_or)
+        {
+            rebuildLeftAnd(formulaElement);
+        }
+        /* check right formula */
+        else if(formulaElement -> subR -> typS == type_or)
+        {
+            rebuildRightOr(formulaElement);
+        }
+    }
+
+    if(formulaElement -> subL != NULL)
+    {
+        distributiveRule(formulaElement -> subL);
+    }
+    if(formulaElement -> subR != NULL)
+    {
+        distributiveRule(formulaElement -> subR);
+    }
+}
+
+/* function to rebuild with | as typ and left contains & */
+void rebuildLeftOr(formula * formulaElement)
+{
+    /* duplicate subformulas */
+    formula * subL_copy = copyFormula(formulaElement -> subL);
+    formula * subR_copy = copyFormula(formulaElement -> subR);
+
+    /* create new formula */
+    formulaElement -> typS = type_and;
+    formulaElement -> subL = createFormula(type_or, NULL, NULL, subL_copy -> subL, subR_copy);
+    formulaElement -> subR = createFormula(type_or, NULL, NULL, subL_copy -> subR, subR_copy);
+}
+
+/* function to rebuild with | as typ and right contains & */
+void rebuildRightOr(formula * formulaElement)
+{
+    /* duplicate subformulas */
+    formula * subL_copy = copyFormula(formulaElement -> subL);
+    formula * subR_copy = copyFormula(formulaElement -> subR);
+
+    /* create new formula */
+    formulaElement -> typS = type_and;
+    formulaElement -> subL = createFormula(type_or, NULL, NULL, subL_copy, subR_copy -> subL);
+    formulaElement -> subR = createFormula(type_or, NULL, NULL, subL_copy, subR_copy -> subR);
+}
+
+/* function to rebuild with & as typ and left contains | */
+void rebuildLeftAnd(formula * formulaElement)
+{
+    /* duplicate subformulas */
+    formula * subL_copy = copyFormula(formulaElement -> subL);
+    formula * subR_copy = copyFormula(formulaElement -> subR);
+
+    /* create new formula */
+    formulaElement -> typS = type_or;
+    formulaElement -> subL = createFormula(type_and, NULL, NULL, subL_copy -> subL, subR_copy);
+    formulaElement -> subR = createFormula(type_and, NULL, NULL, subL_copy -> subR, subR_copy);
+}
+
+/* function to rebuild with & as typ and right contains | */
+void rebuildRightAnd(formula * formulaElement)
+{
+    /* duplicate subformulas */
+    formula * subL_copy = copyFormula(formulaElement -> subL);
+    formula * subR_copy = copyFormula(formulaElement -> subR);
+
+    /* create new formula */
+    formulaElement -> typS = type_or;
+    formulaElement -> subL = createFormula(type_and, NULL, NULL, subL_copy, subR_copy -> subL);
+    formulaElement -> subR = createFormula(type_and, NULL, NULL, subL_copy, subR_copy -> subR);
+}
+
+/* function to convert formula to knfFormula */
+knfFormula * convertToKnfFormula(formula * formulaElement)
+{
+    /* variables */
+    knfFormula * tmpLeft = (knfFormula*) malloc(sizeof(knfFormula));
+    knfFormula * tmpRight = (knfFormula*) malloc(sizeof(knfFormula));
+
+    tmpLeft = NULL;
+    tmpRight = NULL;
+
+    /* check for subformula left and right */
+    if(formulaElement -> subL != NULL)
+    {
+        tmpLeft = convertToKnfFormula(formulaElement -> subL);
+    }
+    if(formulaElement -> subR != NULL)
+    {
+        tmpRight = convertToKnfFormula(formulaElement -> subR);
+    }
+
+    /* create subformula */
+    knfFormula * tmpFormula = createKnfFormula(formulaElement -> typS, formulaElement -> varfunc, formulaElement -> list, tmpLeft, tmpRight, NULL);
+
+    return tmpFormula;
 }
 
 /*void flatten(formula * formulaElement)
