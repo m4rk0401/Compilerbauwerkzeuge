@@ -2,6 +2,17 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+int nameCounter = 1;
+bool renamed = false;
+int nameCounterSkolem = 1;
+char * selectedVarFunc;
+int indexAllVar = 0;
+char * allVar[255];
+int excounter = 0;
+knfformula * startknfformula;
+knfformula * endknfformula;
+bool firstknf = false;
+
 /* forward declaration */
 formula * nnf(formula * formulaElement);
 void eleminationOfArrows(formula * formulaElement);
@@ -16,14 +27,14 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc);
 void renameTermSkolem(term * termElement, char * selectedVarFunc);
 void renameTermListSkolem(termList * termListElement, char * selectedVarFunc);
 void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc);
+void converttoknfformula(formula * formulaElement, knfformula * headElement);
+/*void flatten(formula * formulaElement);
+void createknfFormulaLeftAnd(formula * formulaElement);
+void createknfFormulaLeftOr(formula * formulaElement);
+void createknfFormulaRightAnd(formula * formulaElement);
+void createknfFormulaRightOr(formula * formulaElement);*/
 
-int nameCounter = 1;
-bool renamed = false;
-int nameCounterSkolem = 1;
-char * selectedVarFunc;
-int indexAllVar = 0;
-char * allVar[255];
-int excounter = 0;
+
 
 /* apply operations */
 formula * nnf(formula * formulaElement)
@@ -433,3 +444,118 @@ void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc)
         renameTermListSkolemAll(termListElement -> next, selectedVarFunc);
     }
 }
+
+
+
+void converttoknfformula(formula * formulaElement, knfformula * headElement)
+{
+	if(firstknf == false)
+	{
+		firstknf = true;
+		headElement = createknfFormula(formulaElement -> typS, formulaElement -> varfunc, formulaElement -> list, NULL);
+	}
+	
+	printf("Test1\n");
+	
+	knfformula * temp1 = createknfFormula(formulaElement -> subL -> typS, formulaElement -> subL -> varfunc, formulaElement -> subL -> list, headElement);
+	knfformula * temp2 = createknfFormula(formulaElement -> subR -> typS, formulaElement -> subR -> varfunc, formulaElement -> subR -> list, headElement);
+	
+	if(formulaElement -> subL != NULL)
+	{
+		converttoknfformula(formulaElement -> subL, temp1);
+	}	
+	
+	if(formulaElement -> subR != NULL)
+	{
+		converttoknfformula(formulaElement -> subR, temp2);
+	}
+	else
+	{
+		endknfformula = headElement;
+	}
+}
+
+/*void flatten(formula * formulaElement)
+{
+	if(firstknf == false){
+	
+		firstknf = true;
+		knfformula * temp = createknfFormula(NULL, NULL, NULL, NULL);
+		startknfformula = createknfFormula(formulaElement -> typS, formulaElement -> varfunc, formulaElement -> list, temp);
+	
+	}
+	//* check for and in this and one stage beneath left
+    if(formulaElement -> typS == type_and && formulaElement -> subL -> typS == type_and)
+    {
+		
+    }
+    //* check for or in this and one stage beneath left
+    else if(formulaElement -> typS == type_or && formulaElement -> subL -> typS == type_or)
+    {
+        
+    }
+    //* check for or in this and one stage beneath right
+    else if(formulaElement -> typS == type_and && formulaElement -> subR -> typS == type_and)
+    {
+        
+    }
+	//* check for or in this and one stage beneath right
+    else if(formulaElement -> typS == type_or && formulaElement -> subR -> typS == type_or)
+    {
+        
+    }
+	else
+	{
+	
+		knfformula = createknfFormula(formulaElement -> typS);
+		
+	}
+
+    //* check for subformula left and right 
+    if(formulaElement -> subL != NULL)
+    {
+        flatten(formulaElement -> subL);
+    }
+    if(formulaElement -> subR != NULL)
+    {
+        flatten(formulaElement -> subR);
+    }
+}*/
+
+/*void createknfFormulaLeftAnd(formula * formulaElement)
+{
+	knfformula temp1 = createknfFormula(type_and, formulaElement -> subR -> varfunc, formulaElement -> subR -> list, NULL);
+	knfformula temp2 = createknfFormula(type_and, formulaElement -> subL -> subR -> varfunc, formulaElement -> subL -> subR -> list, temp1);
+	knfformula temp3 = createknfFormula(type_and, formulaElement -> subL -> subL -> varfunc, formulaElement -> subL -> subL -> list, temp2);
+	
+	
+	
+}
+
+
+void createknfFormulaLeftOr(formula * formulaElement)
+{
+	
+	
+	
+	
+	
+}
+
+void createknfFormulaRightAnd(formula * formulaElement)
+{
+	
+	
+	
+	
+	
+}
+
+void createknfFormulaRightOr(formula * formulaElement)
+{
+	
+	
+	
+	
+	
+}*/

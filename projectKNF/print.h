@@ -6,6 +6,7 @@ void printTermList(termList * termListElement);
 void printFormula(formula * formulaElement);
 const char * createSpaces(int spaces);
 void originalPrint(formula * formulaElement, int spaces);
+void printknfFormula(knfformula * formulaElement);
 
 /* print term */
 void printTerm(term * termElement)
@@ -110,6 +111,61 @@ void printFormula(formula * formulaElement)
       break;
   }
 }
+
+/* print formula depending on type */
+void printknfFormula(knfformula * formulaElement)
+{
+	if(formulaElement != NULL){
+		switch(formulaElement -> typS)
+		{
+			case type_atom:
+			  printf("%s", formulaElement -> varfunc);
+			  if (formulaElement -> list != NULL)
+			  {
+				printf("(");
+				printTermList(formulaElement -> list);
+				printf(")");
+			  }
+			  break;
+			case type_and:
+			case type_or:
+			  switch(formulaElement -> typS)
+			  {
+				case type_and:
+					printf(" AND ");
+					break;
+				case type_or:
+					printf(" OR ");
+					break;
+			  }
+			  printf(")");
+			  break;
+			case type_not:
+			  printf("(");
+			  printf("NOT ");
+			  printf(")");
+			  break;
+			case type_top:
+			case type_bottom:
+			  switch(formulaElement -> typS)
+			  {
+				case type_top:
+					printf("TOP");
+					break;
+				case type_bottom:
+					printf("BOTTOM");
+					break;
+			  }
+
+			  break;
+		}
+	}
+	
+	printf("\n");
+	printknfFormula(formulaElement -> next);
+}
+
+
 
 /* function to calculate spaces */
 const char * createSpaces(int spaces)

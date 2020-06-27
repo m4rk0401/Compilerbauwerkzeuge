@@ -103,3 +103,21 @@ formula * createFormula(enum typ pTypS, char * pvarfunc, termList * listElement,
 
     return formula_new;
 }
+
+/* create knf formula */
+knfformula * createknfFormula(enum typ pTypS, char * pvarfunc, termList * listElement, knfformula * next)
+{
+    knfformula * knfformula_new = (knfformula*) malloc(sizeof(knfformula));
+
+    if(knfformula_new == NULL)
+    {
+        return NULL;
+    }
+
+    knfformula_new -> typS = pTypS;
+    knfformula_new -> varfunc = pvarfunc;
+    knfformula_new -> list = listElement;
+    knfformula_new -> next = next;
+
+    return knfformula_new;
+}
