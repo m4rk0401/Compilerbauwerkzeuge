@@ -7,6 +7,7 @@ typedef struct knfFormula knfFormula;
 
 enum typ
 {
+    type_null,
     type_atom,
     type_and,
     type_or,
@@ -16,8 +17,7 @@ enum typ
     type_ex,
     type_all,
     type_top,
-    type_bottom,
-    type_null
+    type_bottom
 };
 
 struct term

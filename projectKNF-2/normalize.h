@@ -32,8 +32,8 @@ void rebuildLeftAnd(formula * formulaElement);
 void rebuildRightAnd(formula * formulaElement);
 knfFormula * convertToKnfFormula(formula * formulaElement);
 void flatten(knfFormula * formulaElement);
-void createKnfFormulaLeft(knfFormula * formulaElement);
-void createKnfFormulaRight(knfFormula * formulaElement);
+void createKnfFormulaLeft(knfFormula * formulaElement, bool setAnd);
+void createKnfFormulaRight(knfFormula * formulaElement, bool setAnd);
 
 
 
@@ -201,8 +201,8 @@ void renameRule(formula * formulaElement)
         selectedVarFunc = malloc(strlen(formulaElement -> varfunc) + 1);
         strncpy(selectedVarFunc, formulaElement -> varfunc, strlen(formulaElement -> varfunc) + 1);
 
-        formulaElement -> varfunc = malloc(strlen("  ") + 1);
-        snprintf(formulaElement -> varfunc, 3, "v%d", nameCounter);
+        formulaElement -> varfunc = malloc(strlen("   ") + 1);
+        snprintf(formulaElement -> varfunc, 4, "v%d", nameCounter);
 
         if(formulaElement -> list != NULL)
         {
@@ -229,8 +229,8 @@ void renameSubFormula(formula * formulaElement, char * selectedVarFunc)
     {
         if(strcmp(formulaElement -> varfunc, selectedVarFunc) == 0)
         {
-            formulaElement -> varfunc = malloc(strlen("  ") + 1);
-            snprintf(formulaElement -> varfunc, 3, "v%d", nameCounter);
+            formulaElement -> varfunc = malloc(strlen("   ") + 1);
+            snprintf(formulaElement -> varfunc, 4, "v%d", nameCounter);
         }
     }
     if(formulaElement -> list != NULL)
@@ -250,8 +250,8 @@ void renameSubFormula(formula * formulaElement, char * selectedVarFunc)
 /* rename term */
 void renameTerm(term * termElement, char * selectedVarFunc)
 {
-    termElement -> varfunc = malloc(strlen("  ") + 1);
-    snprintf(termElement -> varfunc, 3, "v%d", nameCounter);
+    termElement -> varfunc = malloc(strlen("   ") + 1);
+    snprintf(termElement -> varfunc, 4, "v%d", nameCounter);
 
     if(termElement -> list != NULL)
     {
@@ -370,8 +370,8 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc)
     {
         if(strcmp(formulaElement -> varfunc, selectedVarFunc) == 0)
         {
-            formulaElement -> varfunc = malloc(strlen("  ") + 1);
-            snprintf(formulaElement -> varfunc, 3, "f%d", nameCounterSkolem);
+            formulaElement -> varfunc = malloc(strlen("   ") + 1);
+            snprintf(formulaElement -> varfunc, 4, "f%d", nameCounterSkolem);
         }
     }
     if(formulaElement -> list != NULL && indexAllVar != 0)
@@ -395,8 +395,8 @@ void renameSubFormulaSkolem(formula * formulaElement, char * selectedVarFunc)
 /* rename term for skolem*/
 void renameTermSkolem(term * termElement, char * selectedVarFunc)
 {
-    termElement -> varfunc = malloc(strlen("  ") + 1);
-    snprintf(termElement -> varfunc, 3, "f%d", nameCounterSkolem);
+    termElement -> varfunc = malloc(strlen("   ") + 1);
+    snprintf(termElement -> varfunc, 4, "f%d", nameCounterSkolem);
 
     if(termElement -> list != NULL)
     {
@@ -439,8 +439,8 @@ void renameTermListSkolemAll(termList * termListElement, char * selectedVarFunc)
             }
             tmpList2 = tmpList;
         }
-        char * tmpString= malloc(strlen("  ") + 1);
-        snprintf(tmpString, 3, "f%d", excounter);
+        char * tmpString= malloc(strlen("   ") + 1);
+        snprintf(tmpString, 4, "f%d", excounter);
 
         termListElement -> first = createTerm(tmpString, tmpList);
     }
@@ -488,20 +488,6 @@ void  distributiveRule(formula * formulaElement)
         }
         /* check right formula */
         else if(formulaElement -> subR -> typS == type_and && formulaElement -> subL != NULL)
-        {
-            rebuildRightOr(formulaElement);
-        }
-    }
-    /* check fir and in typS */
-    else if(formulaElement -> typS == type_and)
-    {
-        /* check left formula */
-        if(formulaElement -> subL -> typS == type_or)
-        {
-            rebuildLeftAnd(formulaElement);
-        }
-        /* check right formula */
-        else if(formulaElement -> subR -> typS == type_or)
         {
             rebuildRightOr(formulaElement);
         }
@@ -615,31 +601,42 @@ void flatten(knfFormula * formulaElement)
 	//* check for and in this and one stage beneath left
     if(formulaElement -> typS == type_and && formulaElement -> subL -> typS == type_and && formulaElement -> subR -> typS != type_or)
     {
-		createKnfFormulaLeft(formulaElement);
+		createKnfFormulaLeft(formulaElement, true);
     }
     //* check for or in this and one stage beneath left
     else if(formulaElement -> typS == type_or && formulaElement -> subL -> typS == type_or && formulaElement -> subR -> typS != type_and)
     {
-        createKnfFormulaLeft(formulaElement);
+        createKnfFormulaLeft(formulaElement, false);
     }
     //* check for or in this and one stage beneath right
     else if(formulaElement -> typS == type_and && formulaElement -> subR -> typS == type_and && formulaElement -> subL -> typS != type_or)
     {
-        createKnfFormulaRight(formulaElement);
+        createKnfFormulaRight(formulaElement, true);
     }
 	//* check for or in this and one stage beneath right
     else if(formulaElement -> typS == type_or && formulaElement -> subR -> typS == type_or && formulaElement -> subL -> typS != type_and)
     {
-        createKnfFormulaRight(formulaElement);
+        createKnfFormulaRight(formulaElement, false);
     }
 }
 
 /* function to copy both left subformulas */
-void createKnfFormulaLeft(knfFormula * formulaElement)
+void createKnfFormulaLeft(knfFormula * formulaElement, bool setAnd)
 {
+    /* set and/or */
+    int operator;
+    if(setAnd)
+    {
+        operator = 2;
+    }
+    else
+    {
+        operator = 3;
+    }
+    
     /* copy subR */
     knfFormula * subL_copy = copyKnfFormula(formulaElement -> subL);
-    knfFormula * subR_copy = copyKnfFormula(formulaElement -> subR);
+    knfFormula * subR_copy = copyKnfFormula(formulaElement -> subR);    
 
     /* take subL formulas one level higher */
     formulaElement -> subL = formulaElement -> subL -> subL;
@@ -652,29 +649,40 @@ void createKnfFormulaLeft(knfFormula * formulaElement)
     }
 
     /* take subR formulas one level higher */
+    knfFormula * tmpFormula = (knfFormula*) malloc(sizeof(knfFormula));
+    tmpFormula = formulaElement;
+    if(tmpFormula -> next -> typS != type_null)
+    {
+        while(tmpFormula -> next != NULL)
+        {
+            tmpFormula = tmpFormula -> next;
+        }
+    }
+
     if(subR_copy -> subL != NULL && subR_copy -> subR != NULL)
     {
-        knfFormula * tmpFormula = (knfFormula*) malloc(sizeof(knfFormula));
-        tmpFormula = formulaElement -> next;
-        if(tmpFormula != NULL)
-        {
-            while(tmpFormula -> next != NULL)
-            {
-                tmpFormula = tmpFormula -> next;
-            }
-        }
-
-        tmpFormula -> next = createKnfFormula(type_null, NULL, NULL, subR_copy -> subL, subR_copy -> subR, NULL);
+        tmpFormula -> next = createKnfFormula(operator, NULL, NULL, subR_copy -> subL, subR_copy -> subR, subR_copy -> next);
     }
     else
     {
-        formulaElement -> next = createKnfFormula(type_null, NULL, NULL, subR_copy, NULL, NULL);
+        tmpFormula -> next = createKnfFormula(operator, NULL, NULL, subR_copy, NULL, NULL);
     }
 }
 
 /* function to copy both right subformulas */
-void createKnfFormulaRight(knfFormula * formulaElement)
+void createKnfFormulaRight(knfFormula * formulaElement, bool setAnd)
 {
+    /* set and/or */
+    int operator;
+    if(setAnd)
+    {
+        operator = 1;
+    }
+    else
+    {
+        operator = 2;
+    }
+
 	/* copy subR */
     knfFormula * subL_copy = copyKnfFormula(formulaElement -> subL);
     knfFormula * subR_copy = copyKnfFormula(formulaElement -> subR);
@@ -699,8 +707,8 @@ void createKnfFormulaRight(knfFormula * formulaElement)
 
     /* copy subR into next */
     knfFormula * tmpFormula = (knfFormula*) malloc(sizeof(knfFormula));
-    tmpFormula = formulaElement -> next;
-    if(tmpFormula != NULL)
+    tmpFormula = formulaElement;
+    if(tmpFormula -> next -> typS != 0)
     {
         while(tmpFormula -> next != NULL)
         {
@@ -708,6 +716,5 @@ void createKnfFormulaRight(knfFormula * formulaElement)
         }
     }
 
-    tmpFormula -> next = createKnfFormula(type_null, NULL, NULL, subR_copy -> subL, subR_copy -> subR, NULL);
+    tmpFormula -> next = createKnfFormula(operator, NULL, NULL, subR_copy -> subL, subR_copy -> subR, subR_copy -> next);
 }
-

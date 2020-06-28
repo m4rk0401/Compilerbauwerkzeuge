@@ -1736,6 +1736,10 @@ int main (int argc, char* argv[])
 
   printf("Distributiv:\n");
   distributiveRule(formula_input);
+  distributiveRule(formula_input);
+  distributiveRule(formula_input);
+  distributiveRule(formula_input);
+  distributiveRule(formula_input);
   originalPrint(formula_input, 0);
   printf("\n");
   
