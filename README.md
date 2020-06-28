@@ -101,5 +101,5 @@ Am Ende erhalten Sie eine Formel, die eine Konjunktion von Disjunktionen von Lit
 
 (Hierbei sind A-I Literale, also potentiell negierte Atome).
 
-Ordner: 
+Ordner: projectKNF-2
 
