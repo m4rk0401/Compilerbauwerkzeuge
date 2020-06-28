@@ -1,6 +1,6 @@
 # Compilerbauwerkzeuge
 
-Das ist die Lösung der Abgabe für die Vorlesung "Compilerbauwerkzeuge" an der DHBW Stuttgart. Aufgrund von einem Missgeschick wurde die Aufgabe für unser Team verändert wodurch der Umfang ein wenig höher ist als bei der normalen Abgabe. Im Anhang sind die einzelnen Aufgabe aufgelistet und jeweils welcher Ordner die Aufgabe löst. Kleiner Hinweis nebenbei. Unsere Lösung ist nicht die effektivste welche möglich ist. Besser gesagt eher sehr uneffektiv.
+Das ist die Lösung der Abgabe für die Vorlesung "Compilerbauwerkzeuge" an der DHBW Stuttgart. Aufgrund von einem Missgeschick wurde die Aufgabe für unser Team verändert, wodurch der Umfang ein wenig höher ist als bei der normalen Abgabe. Im Anhang sind die einzelnen Aufgabe aufgelistet und jeweils welcher Ordner die Aufgabe löst. Kleiner Hinweis nebenbei. Unsere Lösung ist nicht die effektivste welche möglich ist. Besser gesagt eher sehr uneffektiv.
 
 #1. Teilaufgabe:
 Schreiben Sie ein Flex-File fur einen Scanner, der aus einer Datei eine ¨
